@@ -19,12 +19,6 @@ export default function Home() {
     <div className={darkMode ? 'dark' : ''}>
 
       <div className="bg-white dark:bg-gray-900 min-h-screen font-(family-name:--font-geist-sans)">
-        <Head>
-          <title>Ketan Solanki | Software Engineer</title>
-          <meta name="description" content="Portfolio of Ketan Solanki - Software Engineer specializing in Python and JavaScript" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         
         <main>

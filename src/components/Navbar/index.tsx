@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Sun, Moon } from 'lucide-react';
+import Logo from '../../app/logo.png';
 
 interface NavLink {
   name: string;
@@ -44,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0 font-bold text-xl text-gray-900 dark:text-white">
             <Link href="#home">
-              <span>K<span className="text-blue-600">S</span></span>
+              <img src='/logo.png' alt='KS' className='h-[3rem] ' />
             </Link>
           </div>
           
