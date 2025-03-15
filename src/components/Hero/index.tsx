@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-12"> {/* Added gap-12 */}
           <div className="w-full md:w-1/2 mb-16 md:mb-0"> {/* Increased mb-12 to mb-16 */}
             <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6"> {/* Increased px-4 py-2 to px-5 py-3, mb-4 to mb-6 */}
-              <p className="text-blue-600 dark:text-blue-400 font-medium">Hello, I'm</p>
+              <p className="text-blue-600 dark:text-blue-400 font-medium">Hello, I&apos;m</p>
             </div>
             
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8"> {/* Increased mb-6 to mb-8 */}
@@ -168,14 +168,14 @@ const Hero: React.FC = () => {
                 </div>
                 <div className={styles.codeBlock}>
                   <span className={styles.codeLine}><span className={styles.codeHighlight}>const</span> developer = {`{`}</span>
-                  <span className={styles.codeLine}>  name: <span className={styles.codeHighlight}>'Ketan Solanki'</span>,</span>
-                  <span className={styles.codeLine}>  skills: [<span className={styles.codeHighlight}>'Python'</span>, <span className={styles.codeHighlight}>'JavaScript'</span>, <span className={styles.codeHighlight}>'React'</span>],</span>
-                  <span className={styles.codeLine}>  passion: <span className={styles.codeHighlight}>'Building useful apps'</span>,</span>
+                  <span className={styles.codeLine}>  name: <span className={styles.codeHighlight}>&apos;Ketan Solanki&apos;</span>,</span>
+                  <span className={styles.codeLine}>  skills: [<span className={styles.codeHighlight}>&apos;Python&apos;</span>, <span className={styles.codeHighlight}>&apos;JavaScript&apos;</span>, <span className={styles.codeHighlight}>&apos;React&apos;</span>],</span>
+                  <span className={styles.codeLine}>  passion: <span className={styles.codeHighlight}>&apos;Building useful apps&apos;</span>,</span>
                   <span className={styles.codeLine}>  coffee: <span className={styles.codeHighlight}>true</span></span>
                   <span className={styles.codeLine}>{`}`};</span>
                   <span className={`${styles.codeLine} mt-4`}><span className={styles.codeHighlight}>function</span> createAwesomeProject() {`{`}</span> {/* Increased mt-2 to mt-4 */}
                   <span className={styles.codeLine}>  <span className={styles.codeHighlight}>return</span> developer.skills.map(<span className={styles.codeHighlight}>s</span> =&gt; {`{`}</span>
-                  <span className={styles.codeLine}>    <span className={styles.codeHighlight}>return</span> <span className={styles.codeHighlight}>s + ' magic'</span>;</span>
+                  <span className={styles.codeLine}>    <span className={styles.codeHighlight}>return</span> <span className={styles.codeHighlight}>s + &apos; magic&apos;</span>;</span>
                   <span className={styles.codeLine}>  {`}`});</span>
                   <span className={styles.codeLine}>{`}`}</span>
                 </div>

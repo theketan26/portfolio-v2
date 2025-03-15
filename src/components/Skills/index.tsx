@@ -70,7 +70,7 @@ const Skills: React.FC = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, []); // eslint-disable-next-line
 
   useEffect(() => {
     // Typing animation for skills

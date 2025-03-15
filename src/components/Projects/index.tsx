@@ -71,22 +71,22 @@ const Projects: React.FC = () => {
                 <span className={styles.codeHighlight}>const</span> iotDashboard = {`{`}
               </span>
               <span className={styles.codeLine}>
-                name: <span className={styles.codeHighlight}>'IoT Control Dashboard'</span>,
+                name: <span className={styles.codeHighlight}>&apos;IoT Control Dashboard&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>'Real-time monitoring system for IoT devices'</span>,
+                description: <span className={styles.codeHighlight}>&apos;Real-time monitoring system for IoT devices&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 features: [
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Live hardware status updates via WebSocket'</span>,
+                <span className={styles.codeHighlight}>&apos;Live hardware status updates via WebSocket&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Responsive React interface with Next.js'</span>,
+                <span className={styles.codeHighlight}>&apos;Responsive React interface with Next.js&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Python backend for device communication'</span>,
+                <span className={styles.codeHighlight}>&apos;Python backend for device communication&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 ],
@@ -120,22 +120,22 @@ const Projects: React.FC = () => {
                 <span className={styles.codeHighlight}>const</span> taskManager = {`{`}
               </span>
               <span className={styles.codeLine}>
-                name: <span className={styles.codeHighlight}>'TaskSync Manager'</span>,
+                name: <span className={styles.codeHighlight}>&apos;TaskSync Manager&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>'Team productivity app with real-time sync'</span>,
+                description: <span className={styles.codeHighlight}>&apos;Team productivity app with real-time sync&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 features: [
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Task CRUD with Flask REST API'</span>,
+                <span className={styles.codeHighlight}>&apos;Task CRUD with Flask REST API&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'React frontend with drag-and-drop UI'</span>,
+                <span className={styles.codeHighlight}>&apos;React frontend with drag-and-drop UI&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Real-time updates using Socket.IO'</span>,
+                <span className={styles.codeHighlight}>&apos;Real-time updates using Socket.IO&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 ],
@@ -169,22 +169,22 @@ const Projects: React.FC = () => {
                 <span className={styles.codeHighlight}>const</span> hardwareMonitor = {`{`}
               </span>
               <span className={styles.codeLine}>
-                name: <span className={styles.codeHighlight}>'HardwareSync Monitor'</span>,
+                name: <span className={styles.codeHighlight}>&apos;HardwareSync Monitor&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>'System diagnostics tool for hardware'</span>,
+                description: <span className={styles.codeHighlight}>&apos;System diagnostics tool for hardware&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 features: [
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Python scripts for hardware data collection'</span>,
+                <span className={styles.codeHighlight}>&apos;Python scripts for hardware data collection&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Next.js dashboard for metrics visualization'</span>,
+                <span className={styles.codeHighlight}>&apos;Next.js dashboard for metrics visualization&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Cross-platform compatibility'</span>,
+                <span className={styles.codeHighlight}>&apos;Cross-platform compatibility&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 ],

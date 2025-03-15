@@ -1,7 +1,6 @@
 // components/About.tsx
 import { useEffect, useRef } from 'react';
 import { Code, Server, Monitor, Cpu } from 'lucide-react';
-import Link from 'next/link';
 
 // Style definitions matching Hero component
 const styles = {
@@ -59,7 +58,7 @@ const About: React.FC = () => {
           <div className="w-full md:w-1/2">
             <h3 className="text-3xl font-bold text-white mb-6">My Story</h3>
             <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-              I'm Ketan Solanki, a 22-year-old tech enthusiast who turned my childhood curiosity about computers into a thriving career in software engineering.
+              I&apos;m Ketan Solanki, a 22-year-old tech enthusiast who turned my childhood curiosity about computers into a thriving career in software engineering.
             </p>
             <p className="text-gray-300 text-lg mb-6 leading-relaxed">
               As a Senior Software Engineer at Tech Innovations Inc., I craft solutions using Python and JavaScript, with a strong focus on React and Next.js. My love for technology extends beyond coding—I’m equally fascinated by computer hardware and how it powers our digital world.
@@ -103,13 +102,13 @@ const About: React.FC = () => {
                   constructor() {` {`}
                 </span>
                 <span className={styles.codeLine}>
-                  this.name = <span className={styles.codeHighlight}>'Ketan Solanki'</span>;
+                  this.name = <span className={styles.codeHighlight}>&apos;Ketan Solanki&apos;</span>;
                 </span>
                 <span className={styles.codeLine}>
                   this.age = <span className={styles.codeHighlight}>22</span>;
                 </span>
                 <span className={styles.codeLine}>
-                  this.title = <span className={styles.codeHighlight}>'Senior Dev'</span>;
+                  this.title = <span className={styles.codeHighlight}>&apos;Senior Dev&apos;</span>;
                 </span>
                 <span className={styles.codeLine}>
                   {`}`}
@@ -119,10 +118,10 @@ const About: React.FC = () => {
                 </span>
                 <span className={styles.codeLine}>
                   <span className={styles.codeHighlight}>return</span> [
-                    <span className={styles.codeHighlight}>'Python'</span>,
-                    <span className={styles.codeHighlight}>'JS'</span>,
-                    <span className={styles.codeHighlight}>'React'</span>,
-                    <span className={styles.codeHighlight}>'Next.js'</span>
+                    <span className={styles.codeHighlight}>&apos;Python&apos;</span>,
+                    <span className={styles.codeHighlight}>&apos;JS&apos;</span>,
+                    <span className={styles.codeHighlight}>&apos;React&apos;</span>,
+                    <span className={styles.codeHighlight}>&apos;Next.js&apos;</span>
                   ];
                 </span>
                 <span className={styles.codeLine}>

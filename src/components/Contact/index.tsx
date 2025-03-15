@@ -1,5 +1,5 @@
 // components/Contact.tsx
-import { Mail, ArrowUpRight, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import { Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -11,7 +11,7 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <p className="text-blue-600 dark:text-blue-500 text-lg font-medium mb-2">Contact</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">Let's Connect</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">Let&apos;s Connect</h2>
         </div>
         
         <div className="flex flex-col items-center">

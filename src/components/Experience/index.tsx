@@ -71,32 +71,32 @@ const Experience: React.FC = () => {
                 <span className={styles.codeHighlight}>const</span> seniorRole = {`{`}
               </span>
               <span className={styles.codeLine}>
-                title: <span className={styles.codeHighlight}>'Senior Software Engineer'</span>,
+                title: <span className={styles.codeHighlight}>&apos;Senior Software Engineer&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                company: <span className={styles.codeHighlight}>'Tech Innovations Inc.'</span>,
+                company: <span className={styles.codeHighlight}>&apos;Tech Innovations Inc.&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 <Calendar size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                duration: <span className={styles.codeHighlight}>'Jun 2023 - Present'</span>,
+                duration: <span className={styles.codeHighlight}>&apos;Jun 2023 - Present&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>'Leading development of innovative software solutions...'</span>,
+                description: <span className={styles.codeHighlight}>&apos;Leading development of innovative software solutions...&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 contributions: [
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Crafted scalable Python backends with Flask and Django'</span>,
+                <span className={styles.codeHighlight}>&apos;Crafted scalable Python backends with Flask and Django&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Developed responsive React/Next.js frontends'</span>,
+                <span className={styles.codeHighlight}>&apos;Developed responsive React/Next.js frontends&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Optimized hardware-software integration for IoT'</span>,
+                <span className={styles.codeHighlight}>&apos;Optimized hardware-software integration for IoT&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Mentored junior developers in agile practices'</span>
+                <span className={styles.codeHighlight}>&apos;Mentored junior developers in agile practices&apos;</span>
               </span>
               <span className={styles.codeLine}>
                 ],
@@ -130,29 +130,29 @@ const Experience: React.FC = () => {
                 <span className={styles.codeHighlight}>const</span> juniorRole = {`{`}
               </span>
               <span className={styles.codeLine}>
-                title: <span className={styles.codeHighlight}>'Junior Software Engineer'</span>,
+                title: <span className={styles.codeHighlight}>&apos;Junior Software Engineer&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                company: <span className={styles.codeHighlight}>'Tech Innovations Inc.'</span>,
+                company: <span className={styles.codeHighlight}>&apos;Tech Innovations Inc.&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 <Calendar size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                duration: <span className={styles.codeHighlight}>'Jan 2022 - May 2023'</span>,
+                duration: <span className={styles.codeHighlight}>&apos;Jan 2022 - May 2023&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>'Began career building web applications...'</span>,
+                description: <span className={styles.codeHighlight}>&apos;Began career building web applications...&apos;</span>,
               </span>
               <span className={styles.codeLine}>
                 achievements: [
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Built reusable React components for internal tools'</span>,
+                <span className={styles.codeHighlight}>&apos;Built reusable React components for internal tools&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Assisted in Python script automation for hardware'</span>,
+                <span className={styles.codeHighlight}>&apos;Assisted in Python script automation for hardware&apos;</span>,
               </span>
               <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>'Improved app performance through optimization'</span>
+                <span className={styles.codeHighlight}>&apos;Improved app performance through optimization&apos;</span>
               </span>
               <span className={styles.codeLine}>
                 ],
@@ -187,14 +187,14 @@ const Experience: React.FC = () => {
                   <span className={styles.codeHighlight}>const</span> education = {`{`}
                 </span>
                 <span className={styles.codeLine}>
-                  degree: <span className={styles.codeHighlight}>'B.S. in Computer Science'</span>,
+                  degree: <span className={styles.codeHighlight}>&apos;B.S. in Computer Science&apos;</span>,
                 </span>
                 <span className={styles.codeLine}>
-                  institution: <span className={styles.codeHighlight}>'University of Technology'</span>,
+                  institution: <span className={styles.codeHighlight}>&apos;University of Technology&apos;</span>,
                 </span>
                 <span className={styles.codeLine}>
                   <Calendar size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                  years: <span className={styles.codeHighlight}>'2019 - 2022'</span>
+                  years: <span className={styles.codeHighlight}>&apos;2019 - 2022&apos;</span>
                 </span>
                 <span className={styles.codeLine}>{`}`}</span>
               </div>
