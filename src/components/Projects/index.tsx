@@ -1,5 +1,5 @@
 // components/Projects.tsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Code } from 'lucide-react';
 
 // Style definitions matching previous components
@@ -9,17 +9,49 @@ const styles = {
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-80 h-80 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-cyan-800`,
   square: `absolute w-16 h-16 rotate-45 border-4 border-cyan-200 dark:border-cyan-800`,
-  codeContainer: `relative bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-xl p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 transform max-w-2xl w-full`,
+  codeContainer: `font-(family-name:--font-geist-mono) relative bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-xl p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 transform max-w-2xl w-full`,
   codeHeader: `flex items-center justify-between mb-4`,
-  codeDot: `w-3 h-3 rounded-full mr-2`,
+  codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
   codeBlock: `font-mono text-sm text-gray-800 dark:text-gray-300 leading-relaxed`,
   codeLine: `block mb-1 pl-4 border-l-2 border-blue-400 dark:border-cyan-600`,
   codeHighlight: `text-blue-600 dark:text-cyan-400`,
   techTag: `inline-block px-2 py-0.5 bg-blue-100 dark:bg-cyan-900/30 text-blue-800 dark:text-cyan-300 rounded-full text-xs mr-2 mb-1`,
 };
 
+const projects = [{
+    fileName: 'cricketDataAnalysis.js',
+    constName: 'cricketDataAnalysis',
+    name: 'Cricket Data Analysis',
+    description: 'Python project to analyse large cricket data set for insights such as average and strike-rate.',
+    features: [
+      'Analyze raw cricket data in json and csv format.', 
+      'Analyze data of any player.'
+    ],
+    techStack: ['Python', 'Pandas'],
+    link: 'https://github.com/theketan26/cricket-data-analysis',
+  }, {
+    fileName: 'pmfbyFormFeeder.js',
+    constName: 'pmbfyFormFeeder',
+    name: 'PM Form Feeder',
+    description: 'Automatic form feeder from extracting data from excel.(Client project)',
+    features: [
+      'Extract useful data from multiple excel files.', 
+      'Feeds 3 step form, having multiple verifications and options.',
+      'GUI too provide details of the processes.',
+      'Multiple processes and instances at once, for efficiency.'
+    ],
+    techStack: ['Python', 'Selenium', 'Tkinter'],
+  },
+]
+
 const Projects: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const [isIotOpen, setIsIotOpen] = useState(true);
+  const [isIotMinimized, setIsIotMinimized] = useState(false);
+  const [isIotHidden, setIsIotHidden] = useState(false);
+  const [openedProjects, setOpenedProjects] = useState<string[]>([]);
+  const [minimizedProjects, setMinimizedProjects] = useState<string[]>([]);
+  const [hiddenProjects, setHiddenProjects] = useState<string[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,150 +88,89 @@ const Projects: React.FC = () => {
 
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Project 1: IoT Dashboard */}
-          <div className={styles.codeContainer + ' rotate-3'}>
-            <div className={styles.codeHeader}>
-              <div className="flex items-center">
-                <span className={`${styles.codeDot} bg-red-500`}></span>
-                <span className={`${styles.codeDot} bg-yellow-500`}></span>
-                <span className={`${styles.codeDot} bg-green-500`}></span>
-              </div>
-              <span className="text-xs text-gray-500 dark:text-gray-400">iotDashboard.js</span>
-            </div>
-            <div className={styles.codeBlock}>
-              <span className={styles.codeLine}>
-                <Code size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                <span className={styles.codeHighlight}>const</span> iotDashboard = {`{`}
-              </span>
-              <span className={styles.codeLine}>
-                name: <span className={styles.codeHighlight}>&apos;IoT Control Dashboard&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>&apos;Real-time monitoring system for IoT devices&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                features: [
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Live hardware status updates via WebSocket&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Responsive React interface with Next.js&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Python backend for device communication&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                ],
-              </span>
-              <span className={styles.codeLine}>
-                techStack: [
-                  <span className={styles.techTag}>Python</span>
-                  <span className={styles.techTag}>React</span>
-                  <span className={styles.techTag}>Next.js</span>
-                  <span className={styles.techTag}>WebSocket</span>
-                  <span className={styles.techTag}>Hardware</span>
-                ]
-              </span>
-              <span className={styles.codeLine}>{`}`}</span>
-            </div>
-          </div>
-
-          {/* Project 2: Task Manager */}
-          <div className={styles.codeContainer + ' -rotate-3'}>
-            <div className={styles.codeHeader}>
-              <div className="flex items-center">
-                <span className={`${styles.codeDot} bg-red-500`}></span>
-                <span className={`${styles.codeDot} bg-yellow-500`}></span>
-                <span className={`${styles.codeDot} bg-green-500`}></span>
-              </div>
-              <span className="text-xs text-gray-500 dark:text-gray-400">taskManager.js</span>
-            </div>
-            <div className={styles.codeBlock}>
-              <span className={styles.codeLine}>
-                <Code size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                <span className={styles.codeHighlight}>const</span> taskManager = {`{`}
-              </span>
-              <span className={styles.codeLine}>
-                name: <span className={styles.codeHighlight}>&apos;TaskSync Manager&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>&apos;Team productivity app with real-time sync&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                features: [
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Task CRUD with Flask REST API&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;React frontend with drag-and-drop UI&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Real-time updates using Socket.IO&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                ],
-              </span>
-              <span className={styles.codeLine}>
-                techStack: [
-                  <span className={styles.techTag}>Python</span>
-                  <span className={styles.techTag}>Flask</span>
-                  <span className={styles.techTag}>React</span>
-                  <span className={styles.techTag}>Socket.IO</span>
-                  <span className={styles.techTag}>JavaScript</span>
-                ]
-              </span>
-              <span className={styles.codeLine}>{`}`}</span>
-            </div>
-          </div>
-
-          {/* Project 3: Hardware Monitor */}
-          <div className={styles.codeContainer + ' rotate-3'}>
-            <div className={styles.codeHeader}>
-              <div className="flex items-center">
-                <span className={`${styles.codeDot} bg-red-500`}></span>
-                <span className={`${styles.codeDot} bg-yellow-500`}></span>
-                <span className={`${styles.codeDot} bg-green-500`}></span>
-              </div>
-              <span className="text-xs text-gray-500 dark:text-gray-400">hardwareMonitor.js</span>
-            </div>
-            <div className={styles.codeBlock}>
-              <span className={styles.codeLine}>
-                <Code size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                <span className={styles.codeHighlight}>const</span> hardwareMonitor = {`{`}
-              </span>
-              <span className={styles.codeLine}>
-                name: <span className={styles.codeHighlight}>&apos;HardwareSync Monitor&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                description: <span className={styles.codeHighlight}>&apos;System diagnostics tool for hardware&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                features: [
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Python scripts for hardware data collection&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Next.js dashboard for metrics visualization&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                <span className={styles.codeHighlight}>&apos;Cross-platform compatibility&apos;</span>,
-              </span>
-              <span className={styles.codeLine}>
-                ],
-              </span>
-              <span className={styles.codeLine}>
-                techStack: [
-                  <span className={styles.techTag}>Python</span>
-                  <span className={styles.techTag}>Next.js</span>
-                  <span className={styles.techTag}>JavaScript</span>
-                  <span className={styles.techTag}>Hardware</span>
-                ]
-              </span>
-              <span className={styles.codeLine}>{`}`}</span>
-            </div>
-          </div>
+          {
+            projects.map((project, index) => (
+              !openedProjects.includes(project.constName) && (
+                <div key={index} className={styles.codeContainer + (index % 2 ? ' rotate-3' : ' -rotate-3')}>
+                  <div className={styles.codeHeader}>
+                    <div className="flex items-center">
+                      <button 
+                        className={`${styles.codeDot} bg-red-500`}
+                        onClick={() => {
+                          if (openedProjects.includes(project.constName))
+                            setOpenedProjects(openedProjects.filter(p => p !== project.constName));
+                          else
+                            setOpenedProjects([...openedProjects, project.constName]);
+                        }}
+                      ></button>
+                      <button 
+                        className={`${styles.codeDot} bg-yellow-500`}
+                        onClick={() => {
+                          if (minimizedProjects.includes(project.constName))
+                            setMinimizedProjects(minimizedProjects.filter(p => p!== project.constName));
+                          else
+                            setMinimizedProjects([...minimizedProjects, project.constName]);
+                        }}
+                      ></button>
+                      <span 
+                        className={`${styles.codeDot} bg-green-500`}
+                        onClick={() => {
+                          if (hiddenProjects.includes(project.constName))
+                            setHiddenProjects(hiddenProjects.filter(p => p!== project.constName));
+                          else
+                            setHiddenProjects([...hiddenProjects, project.constName]);
+                        }}
+                      ></span>
+                    </div>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{project.fileName}</span>
+                  </div>
+                  {
+                    !hiddenProjects.includes(project.constName) && (
+                    <div className={styles.codeBlock}>
+                      <span className={styles.codeLine}>
+                        <Code size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
+                        <span className={styles.codeHighlight}>const</span> {project.constName} = {`{`}{minimizedProjects.includes(project.constName) && '...};'}
+                      </span>
+                      {
+                        !minimizedProjects.includes(project.constName) && (
+                        <>
+                          <span className={`${styles.codeLine} pl-8`}>
+                            name: <span className={styles.codeHighlight}>&apos;{project.name}&apos;</span>,
+                          </span>
+                          <span className={`${styles.codeLine} pl-8`}>
+                            description: <span className={styles.codeHighlight}>&apos;{project.description}&apos;</span>,
+                          </span>
+                          <span className={`${styles.codeLine} pl-8`}>
+                            features: [
+                          </span>
+                          {
+                            project.features.map((feature, index) => (
+                              <span key={index} className={`${styles.codeLine} pl-12`}>
+                                <span className={styles.codeHighlight}>&apos;{feature}&apos;</span>,
+                              </span>
+                            ))
+                          }
+                          <span className={`${styles.codeLine} pl-8`}>
+                            ],
+                          </span>
+                          <span className={`${styles.codeLine} pl-8`}>
+                            techStack: [
+                              {
+                                project.techStack.map((tech) => (
+                                  <span key={tech} className={`${styles.techTag}`}>{tech}</span>
+                                ))
+                              }
+                            ]
+                          </span>
+                          <span className={styles.codeLine}>{`}`}</span>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            ))
+          }
         </div>
       </div>
     </section>
