@@ -186,7 +186,7 @@ const Hero: React.FC = () => {
                               !isCodeWindowMinimized && (
                                 <>
                                   <span className={`ms-4 ${styles.codeLine}`}>name: <span className={styles.codeHighlight}>&apos;Ketan Solanki&apos;</span>,</span>
-                                  <span className={`ms-4 ${styles.codeLine}`}>skills: [<span className={styles.codeHighlight}>&apos;Python&apos;</span>, <span className={styles.codeHighlight}>&apos;JavaScript&apos;</span>, <span className={styles.codeHighlight}>&apos;React&apos;</span>],</span>
+                                  <span className={`ms-4 ${styles.codeLine}`}>skills: [<span className={styles.codeHighlight}>&apos;Python&apos;</span>, <span className={styles.codeHighlight}>&apos;JavaScript&apos;</span>, <span className={styles.codeHighlight}>&apos;SQL&apos;</span>],</span>
                                   <span className={`ms-4 ${styles.codeLine}`}>passion: <span className={styles.codeHighlight}>&apos;Building useful apps&apos;</span>,</span>
                                   <span className={`ms-4 ${styles.codeLine}`}>coffee: <span className={styles.codeHighlight}>true</span></span>
                                   <span className={`${styles.codeLine}`}>{`}`};</span>

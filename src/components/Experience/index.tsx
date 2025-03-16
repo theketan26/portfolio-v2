@@ -199,7 +199,7 @@ const Experience: React.FC = () => {
                           school: <span className={`${styles.codeHighlight}`}>&apos;Sarafa Vidya Niketan&apos;</span>,
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
-                          passingYears: <span className={`${styles.codeHighlight}`}>&apos;2020&apos;</span>
+                          passingYear: <span className={`${styles.codeHighlight}`}>&apos;2020&apos;</span>
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
                           board: <span className={`${styles.codeHighlight}`}>&apos;Central Board of Education&apos;</span>
