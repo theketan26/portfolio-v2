@@ -1,6 +1,5 @@
 // components/About.tsx
 import { useEffect, useRef, useState } from 'react';
-import { Code, Server, Monitor, Cpu } from 'lucide-react';
 
 const styles = {
   aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-800 to-indigo-900 dark:from-gray-950 dark:to-indigo-950`,

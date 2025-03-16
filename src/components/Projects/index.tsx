@@ -47,9 +47,6 @@ const projects = [{
 
 const Projects: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const [isIotOpen, setIsIotOpen] = useState(true);
-  const [isIotMinimized, setIsIotMinimized] = useState(false);
-  const [isIotHidden, setIsIotHidden] = useState(false);
   const [openedProjects, setOpenedProjects] = useState<string[]>([]);
   const [minimizedProjects, setMinimizedProjects] = useState<string[]>([]);
   const [hiddenProjects, setHiddenProjects] = useState<string[]>([]);

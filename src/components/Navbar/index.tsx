@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Sun, Moon } from 'lucide-react';
-import Logo from '../../app/logo.png';
 
 interface NavLink {
   name: string;

@@ -1,6 +1,6 @@
 // components/Experience.tsx
 import { useEffect, useRef, useState } from 'react';
-import { Briefcase, Calendar, Award } from 'lucide-react';
+import { Briefcase, Award } from 'lucide-react';
 
 // Style definitions matching previous components
 const styles = {
