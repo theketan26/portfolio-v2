@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
           {/* Logo/Name */}
           <div className="mb-6 md:mb-0">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Ketan Solanki</h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Software Engineer</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">Software Developer Engineer</p>
           </div>
           
           {/* Quick Links */}
@@ -51,13 +51,13 @@ const Footer: React.FC = () => {
           <div className="mb-6 md:mb-0">
             <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Connect</h3>
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
+              <a href={process.env.NEXT_PUBLIC_GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
                 <Github size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
+              <a href={process.env.NEXT_PUBLIC_LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="mailto:ketan@example.com" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
+              <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
                 <Mail size={20} />
               </a>
             </div>

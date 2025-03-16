@@ -155,7 +155,7 @@ const Hero: React.FC = () => {
                 <Linkedin size={24} />
               </a>
               <a 
-                href="mailto:ketangsolanki129@example.com" 
+                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} 
                 className={styles.socialIcon}
               >
                 <Mail size={24} />

@@ -41,6 +41,7 @@ const projects = [{
       'Multiple processes and instances at once, for efficiency.'
     ],
     techStack: ['Python', 'Selenium', 'Tkinter'],
+    link: 'private',
   },
 ]
 
@@ -161,6 +162,9 @@ const Projects: React.FC = () => {
                                 ))
                               }
                             ]
+                          </span>
+                          <span className={`${styles.codeLine} pl-8`}>
+                            link: {project.link === 'private' ? project.link : <a href={project.link}>{project.link}</a>} 
                           </span>
                           <span className={styles.codeLine}>{`}`}</span>
                         </>
