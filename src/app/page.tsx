@@ -16,7 +16,6 @@ export default function Home() {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-
       <div className="bg-white dark:bg-gray-900 min-h-screen font-(family-name:--font-geist-sans)">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         

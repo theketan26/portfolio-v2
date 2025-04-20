@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import Link from 'next/link';
+import CustomFollower from '../common/CursorFollower';
 
 // Updated style definitions with increased spacing
 const styles = {
@@ -35,53 +36,17 @@ const styles = {
 };
 
 const Hero: React.FC = () => {
-  const typingRef = useRef<HTMLSpanElement>(null);
   const [isCodeWindowOpen, setIsCodeWindowOpen] = useState(true);
   const [isCodeWindowMinimized, setIsCodeWindowMinimized] = useState(false);
   const [isCodeWindowHidden, setIsCodeWindowHidden] = useState(false);
 
-  useEffect(() => {
-    if (!typingRef.current) return;
-
-    const skills: string[] = ['Code', 'Build', 'Create', 'Design', 'Solve'];
-    let skillIndex: number = 0;
-    let charIndex: number = 0;
-    let isDeleting: boolean = false;
-    let typingSpeed: number = 150;
-
-    const type = () => {
-      const currentSkill = skills[skillIndex];
-      
-      if (isDeleting) {
-        if (typingRef.current) {
-          typingRef.current.innerText = currentSkill.substring(0, charIndex - 1);
-        }
-        charIndex--;
-        typingSpeed = 80;
-      } else {
-        if (typingRef.current) {
-          typingRef.current.innerText = currentSkill.substring(0, charIndex + 1);
-        }
-        charIndex++;
-        typingSpeed = 150;
-      }
-
-      if (!isDeleting && charIndex === currentSkill.length) {
-        isDeleting = true;
-        typingSpeed = 1500; // Pause at the end
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        skillIndex = (skillIndex + 1) % skills.length;
-      }
-
-      setTimeout(type, typingSpeed);
-    };
-
-    setTimeout(type, 1000);
-  }, []);
-
   return (
     <section id="home" className={styles.heroSection}>
+      <CustomFollower 
+        cursor='/react-icon.svg' 
+        parentElementId='home'
+      />
+
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <div className={styles.floatingBubble1}></div>
@@ -100,21 +65,22 @@ const Hero: React.FC = () => {
       </div>
       
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10"> {/* Increased padding */}
-        <div className="flex flex-col xl:flex-row items-center justify-between gap-12"> {/* Added gap-12 */}
-          <div className="w-full md:w-1/2 mb-16 md:mb-0"> {/* Increased mb-12 to mb-16 */}
-            <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6"> {/* Increased px-4 py-2 to px-5 py-3, mb-4 to mb-6 */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+        <div className="flex flex-col xl:flex-row items-center justify-between gap-12">
+          <div className="w-full md:w-1/2 min-w-min mb-16 md:mb-0">
+            <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
               <p className="text-blue-600 dark:text-blue-400 font-medium">Hello, I&apos;m</p>
             </div>
             
-            <h1 className="md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8"> {/* Increased mb-6 to mb-8 */}
-              Ketan <span className="text-blue-600 dark:text-blue-500">Solanki</span>
+            <h1 className="md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-800 bg-clip-text text-transparent mb-8 w-max">
+              Ketan Solanki
             </h1>
             
-            <div className="h-14 mb-8"> {/* Increased h-12 to h-14, mb-6 to mb-8 */}
-              <span className="text-2xl sm:text-3xl font-bold text-gray-700 dark:text-gray-300 flex items-center">
-                I<span ref={typingRef} className="text-blue-600 dark:text-blue-500 ml-4"></span> {/* Increased ml-3 to ml-4 */}
-                <span className="animate-blink ml-2 text-blue-600 dark:text-blue-500">|</span> {/* Increased ml-1 to ml-2 */}
+            <div className="h-14 mb-8">
+              <span className="text-2xl sm:text-3xl font-bold text-gray-700 dark:text-gray-300 flex items-center whitespace-nowrap">
+                I am
+                <span className="text-blue-600 dark:text-blue-500 mx-2">Full-Stack</span>
+                Developer
               </span>
             </div>
             

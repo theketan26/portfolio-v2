@@ -59,8 +59,8 @@ const Experience: React.FC = () => {
           <div className="inline-block px-4 py-2 bg-blue-100 dark:bg-cyan-900/30 rounded-full mb-4">
             <p className="text-blue-600 dark:text-cyan-400 font-medium">Work Log</p>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Experience <span className="text-blue-600 dark:text-cyan-500">Timeline</span>
+          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-white to-blue-600 dark:to-cyan-500 w-fit mx-auto bg-clip-text text-transparent">
+            Experience Timeline
           </h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4"></div>
         </div>
@@ -95,7 +95,7 @@ const Experience: React.FC = () => {
                   {!isSeniorMinimized && (
                     <>
                       <span className={`${styles.codeLine} pl-8`}>
-                        title: <span className={styles.codeHighlight}>&apos;Software Developer Engineer&apos;</span>,
+                        title: <span className={styles.codeHighlight}>&apos;Software Development Engineer&apos;</span>,
                       </span>
                       <span className={`${styles.codeLine} pl-8`}>
                         company: <span className={styles.codeHighlight}>&apos;Techdome Solutions Pvt. Ltd.&apos;</span>,

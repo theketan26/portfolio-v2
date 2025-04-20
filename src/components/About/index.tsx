@@ -55,8 +55,8 @@ const About: React.FC = () => {
           <div className="inline-block px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-4">
             <p className="text-indigo-600 dark:text-indigo-400 font-medium">Get to Know Me</p>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Ketan <span className="text-indigo-400">Solanki</span>
+          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-white to-indigo-400 w-fit mx-auto bg-clip-text text-transparent">
+            Ketan <span className="">Solanki</span>
           </h2>
           <div className="w-24 h-1 bg-indigo-500 mx-auto mt-4"></div>
         </div>

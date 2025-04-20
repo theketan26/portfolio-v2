@@ -1,6 +1,7 @@
 // components/Projects.tsx
 import { useEffect, useRef, useState } from 'react';
 import { Code } from 'lucide-react';
+import CustomFollower from '../common/CursorFollower';
 
 // Style definitions matching previous components
 const styles = {
@@ -64,6 +65,11 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className={styles.projectsSection}>
+      <CustomFollower 
+        parentElementId='projects'
+        cursor='/python-icon.svg'
+      />
+
       {/* Parallax Background */}
       <div ref={parallaxRef} className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-40">
         <div className={`${styles.floatingBubble1} animate-pulse`} style={{ animationDuration: '6s' }}></div>
@@ -78,8 +84,8 @@ const Projects: React.FC = () => {
           <div className="inline-block px-4 py-2 bg-blue-100 dark:bg-cyan-900/30 rounded-full mb-4">
             <p className="text-blue-600 dark:text-cyan-400 font-medium">Code Creations</p>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">
-            Projects <span className="text-blue-600 dark:text-cyan-500">Showcase</span>
+          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-600 dark:to-cyan-500 w-fit mx-auto bg-clip-text text-transparent">
+            Projects Showcase
           </h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4"></div>
         </div>
