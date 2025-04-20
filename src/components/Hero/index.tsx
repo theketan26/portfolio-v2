@@ -1,30 +1,30 @@
 // components/Hero.tsx
-import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
-import Link from 'next/link';
-import CustomFollower from '../common/CursorFollower';
+import { useState } from "react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import Link from "next/link";
+import CustomFollower from "../common/CursorFollower";
 
 // Updated style definitions with increased spacing
 const styles = {
   heroSection: `min-h-screen relative overflow-hidden flex items-center py-24 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-950`, // Increased py-16 to py-24
-  
+
   // Animated background elements with adjusted positioning
   floatingBubble1: `absolute top-1/5 left-1/5 w-64 h-64 bg-blue-300/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-pulse`,
   floatingBubble2: `absolute bottom-1/5 right-1/5 w-80 h-80 bg-indigo-300/20 dark:bg-indigo-600/10 rounded-full blur-3xl opacity-80 animate-pulse`, // Adjusted positioning
   floatingBubble3: `absolute -top-20 -right-20 w-64 h-64 bg-purple-300/10 dark:bg-purple-600/10 rounded-full blur-3xl opacity-70 animate-pulse`, // Increased offset
-  
+
   // Geometric shapes with more spread
   circle: `absolute w-32 h-32 rounded-full border-4 border-blue-200 dark:border-blue-800 animate-bounce`,
   square: `absolute w-16 h-16 rotate-45 border-4 border-indigo-200 dark:border-indigo-800 animate-pulse`,
   triangle: `absolute w-0 h-0 border-l-[30px] border-r-[30px] border-b-[52px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-blue-800 animate-bounce`,
-  
+
   // Button styles with increased padding and gap
   primaryButton: `px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full shadow-lg transition-colors flex items-center`, // Increased px-8 py-4 to px-10 py-5
   secondaryButton: `px-10 py-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500 font-medium rounded-full shadow-md hover:shadow-lg transition-all`, // Increased px-8 py-4 to px-10 py-5
-  
+
   // Social icon styles with more padding
   socialIcon: `p-4 bg-white dark:bg-gray-800 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500 rounded-full shadow-md hover:shadow-lg transition-all`, // Increased p-3 to p-4
-  
+
   // Visual element container with adjusted height
   visualContainer: `relative w-full h-72 md:h-96 lg:h-[28rem] flex items-center justify-center`, // Increased heights for more space
   codeContainer: `min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-white/50 dark:bg-gray-800/50 rounded-lg shadow-xl p-8 backdrop-blur-sm border border-gray-200 dark:border-gray-700`, // Increased max-w-md to max-w-lg, p-6 to p-8
@@ -42,145 +42,230 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className={styles.heroSection}>
-      <CustomFollower 
-        cursor='/react-icon.svg' 
-        parentElementId='home'
-      />
+      <CustomFollower cursor="/react-icon.svg" parentElementId="home" />
 
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <div className={styles.floatingBubble1}></div>
         <div className={styles.floatingBubble2}></div>
         <div className={styles.floatingBubble3}></div>
-        
+
         {/* Geometric animated shapes with more spread */}
-        <div className={`${styles.circle} top-1/4 left-1/8 animate-bounce`} style={{ animationDuration: '4s' }}></div>
-        <div className={`${styles.circle} bottom-1/4 left-1/4 animate-bounce`} style={{ animationDuration: '7s' }}></div>
-        <div className={`${styles.circle} bottom-1/3 right-1/4 animate-bounce`} style={{ animationDuration: '2s' }}></div>
-        <div className={`${styles.square} top-1/5 right-1/5 animate-pulse`} style={{ animationDuration: '3s' }}></div>
-        <div className={`${styles.square} bottom-1/3 right-1/2 animate-pulse`} style={{ animationDuration: '2s' }}></div>
-        <div className={`${styles.triangle} bottom-1/3 left-1/8 animate-spin`} style={{ animationDuration: '12s' }}></div>
-        <div className={`${styles.triangle} bottom-1/5 right-1/8 animate-spin`} style={{ animationDuration: '15s' }}></div>
-        <div className={`${styles.triangle} top-1/3 right-1/3 animate-spin`} style={{ animationDuration: '8s' }}></div>
+        <div
+          className={`${styles.circle} top-1/4 left-1/8 animate-bounce`}
+          style={{ animationDuration: "4s" }}
+        ></div>
+        <div
+          className={`${styles.circle} bottom-1/4 left-1/4 animate-bounce`}
+          style={{ animationDuration: "7s" }}
+        ></div>
+        <div
+          className={`${styles.circle} bottom-1/3 right-1/4 animate-bounce`}
+          style={{ animationDuration: "2s" }}
+        ></div>
+        <div
+          className={`${styles.square} top-1/5 right-1/5 animate-pulse`}
+          style={{ animationDuration: "3s" }}
+        ></div>
+        <div
+          className={`${styles.square} bottom-1/3 right-1/2 animate-pulse`}
+          style={{ animationDuration: "2s" }}
+        ></div>
+        <div
+          className={`${styles.triangle} bottom-1/3 left-1/8 animate-spin`}
+          style={{ animationDuration: "12s" }}
+        ></div>
+        <div
+          className={`${styles.triangle} bottom-1/5 right-1/8 animate-spin`}
+          style={{ animationDuration: "15s" }}
+        ></div>
+        <div
+          className={`${styles.triangle} top-1/3 right-1/3 animate-spin`}
+          style={{ animationDuration: "8s" }}
+        ></div>
       </div>
-      
+
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-12">
           <div className="w-full md:w-1/2 min-w-min mb-16 md:mb-0">
             <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
-              <p className="text-blue-600 dark:text-blue-400 font-medium">Hello, I&apos;m</p>
+              <p className="text-blue-600 dark:text-blue-400 font-medium">
+                Hello, I&apos;m
+              </p>
             </div>
-            
+
             <h1 className="md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-800 bg-clip-text text-transparent mb-8 w-max">
               Ketan Solanki
             </h1>
-            
+
             <div className="h-14 mb-8">
               <span className="text-2xl sm:text-3xl font-bold text-gray-700 dark:text-gray-300 flex items-center whitespace-nowrap">
                 I am
-                <span className="text-blue-600 dark:text-blue-500 mx-2">Full-Stack</span>
+                <span className="text-blue-600 dark:text-blue-500 mx-2">
+                  Full-Stack
+                </span>
                 Developer
               </span>
             </div>
-            
-            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mb-10 leading-relaxed"> {/* Increased mb-8 to mb-10 */}
+
+            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mb-10 leading-relaxed">
+              {" "}
+              {/* Increased mb-8 to mb-10 */}
               Making clean code and reliable apps with Programming Language(s).
             </p>
-            
-            <div className="flex flex-wrap gap-6 mb-10"> {/* Increased gap-4 to gap-6, mb-8 to mb-10 */}
-              <Link 
-                href="#contact" 
-                className={styles.primaryButton}
-              >
-                Contact Me <ArrowRight className="ml-3" size={18} /> {/* Increased ml-2 to ml-3 */}
+
+            <div className="flex flex-wrap gap-6 mb-10">
+              {" "}
+              {/* Increased gap-4 to gap-6, mb-8 to mb-10 */}
+              <Link href="#contact" className={styles.primaryButton}>
+                Contact Me <ArrowRight className="ml-3" size={18} />{" "}
+                {/* Increased ml-2 to ml-3 */}
               </Link>
-              <Link 
-                href="#projects" 
-                className={styles.secondaryButton}
-              >
+              <Link href="#projects" className={styles.secondaryButton}>
                 View Projects
               </Link>
             </div>
-            
-            <div className="flex space-x-8"> {/* Increased space-x-6 to space-x-8 */}
-              <a 
+
+            <div className="flex space-x-8">
+              {" "}
+              {/* Increased space-x-6 to space-x-8 */}
+              <a
                 href={process.env.NEXT_PUBLIC_GITHUB_URL}
-                target="_blank" 
-                rel="noopener noreferrer" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.socialIcon}
               >
                 <Github size={24} />
               </a>
-              <a 
-                href={process.env.NEXT_PUBLIC_LINKEDIN_URL} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={process.env.NEXT_PUBLIC_LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.socialIcon}
               >
                 <Linkedin size={24} />
               </a>
-              <a 
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} 
+              <a
+                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
                 className={styles.socialIcon}
               >
                 <Mail size={24} />
               </a>
             </div>
           </div>
-          
-          {
-            isCodeWindowOpen && 
-              <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-                <div className={styles.visualContainer}>
-                  {/* Animated code element */}
-                  <div className={styles.codeContainer}>
-                    <div className={styles.codeHeader}>
-                      <button className={`${styles.codeDot} bg-red-500`} onClick={() => setIsCodeWindowOpen(false)}></button>
-                      <button className={`${styles.codeDot} bg-yellow-500`} onClick={() => setIsCodeWindowMinimized(!isCodeWindowMinimized)}></button>
-                      <span className={`${styles.codeDot} bg-green-500`} onClick={() => setIsCodeWindowHidden(!isCodeWindowHidden)}></span>
-                      <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">myCode.js</span>
-                    </div>
-                      
-                    {
-                      !isCodeWindowHidden && (
-                        <>
-                          <div className={styles.codeBlock}>
-                            <span className={`${styles.codeLine}`}><span className={styles.codeHighlight}>const</span> developer = {`{`}{isCodeWindowMinimized && '...};'}</span>
-                            
-                            {
-                              !isCodeWindowMinimized && (
-                                <>
-                                  <span className={`ms-4 ${styles.codeLine}`}>name: <span className={styles.codeHighlight}>&apos;Ketan Solanki&apos;</span>,</span>
-                                  <span className={`ms-4 ${styles.codeLine}`}>skills: [<span className={styles.codeHighlight}>&apos;Python&apos;</span>, <span className={styles.codeHighlight}>&apos;JavaScript&apos;</span>, <span className={styles.codeHighlight}>&apos;SQL&apos;</span>],</span>
-                                  <span className={`ms-4 ${styles.codeLine}`}>passion: <span className={styles.codeHighlight}>&apos;Building useful apps&apos;</span>,</span>
-                                  <span className={`ms-4 ${styles.codeLine}`}>coffee: <span className={styles.codeHighlight}>true</span></span>
-                                  <span className={`${styles.codeLine}`}>{`}`};</span>
-                                </>
-                              )
-                            }
 
-                            <span className={`${styles.codeLine} mt-4`}><span className={styles.codeHighlight}>function </span>createAwesomeProject() {`{`}{isCodeWindowMinimized && '...};'}</span> {/* Increased mt-2 to mt-4 */}
-                            
-                            {
-                              !isCodeWindowMinimized && (
-                                <>
-                                  <span className={`ms-8 ${styles.codeLine}`}><span className={styles.codeHighlight}>return </span>developer.skills.map(<span className={styles.codeHighlight}>s</span> =&gt; {`{`}</span>
-                                  <span className={`ms-12 ${styles.codeLine}`}><span className={styles.codeHighlight}>return </span><span>s + &apos; magic&apos;</span>;</span>
-                                  <span className={`ms-8 ${styles.codeLine}`}>{`}`}</span>
-                                  <span className={`ms-4 ${styles.codeLine}`}>);</span>
-                                  <span className={`${styles.codeLine}`}>{`}`}</span>
-                                </>
-                              )
-                            }
-                          </div>
-                        </>
-                      )
-                    }
+          {isCodeWindowOpen && (
+            <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+              <div className={styles.visualContainer}>
+                {/* Animated code element */}
+                <div className={styles.codeContainer}>
+                  <div className={styles.codeHeader}>
+                    <button
+                      className={`${styles.codeDot} bg-red-500`}
+                      onClick={() => setIsCodeWindowOpen(false)}
+                    ></button>
+                    <button
+                      className={`${styles.codeDot} bg-yellow-500`}
+                      onClick={() =>
+                        setIsCodeWindowMinimized(!isCodeWindowMinimized)
+                      }
+                    ></button>
+                    <span
+                      className={`${styles.codeDot} bg-green-500`}
+                      onClick={() => setIsCodeWindowHidden(!isCodeWindowHidden)}
+                    ></span>
+                    <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
+                      myCode.js
+                    </span>
                   </div>
+
+                  {!isCodeWindowHidden && (
+                    <>
+                      <div className={styles.codeBlock}>
+                        <span className={`${styles.codeLine}`}>
+                          <span className={styles.codeHighlight}>const</span>{" "}
+                          developer = {`{`}
+                          {isCodeWindowMinimized && "...};"}
+                        </span>
+                        {!isCodeWindowMinimized && (
+                          <>
+                            <span className={`ms-4 ${styles.codeLine}`}>
+                              name:{" "}
+                              <span className={styles.codeHighlight}>
+                                &apos;Ketan Solanki&apos;
+                              </span>
+                              ,
+                            </span>
+                            <span className={`ms-4 ${styles.codeLine}`}>
+                              skills: [
+                              <span className={styles.codeHighlight}>
+                                &apos;Python&apos;
+                              </span>
+                              ,{" "}
+                              <span className={styles.codeHighlight}>
+                                &apos;JavaScript&apos;
+                              </span>
+                              ,{" "}
+                              <span className={styles.codeHighlight}>
+                                &apos;SQL&apos;
+                              </span>
+                              ],
+                            </span>
+                            <span className={`ms-4 ${styles.codeLine}`}>
+                              passion:{" "}
+                              <span className={styles.codeHighlight}>
+                                &apos;Building useful apps&apos;
+                              </span>
+                              ,
+                            </span>
+                            <span className={`ms-4 ${styles.codeLine}`}>
+                              coffee:{" "}
+                              <span className={styles.codeHighlight}>true</span>
+                            </span>
+                            <span className={`${styles.codeLine}`}>{`}`};</span>
+                          </>
+                        )}
+                        <span className={`${styles.codeLine} mt-4`}>
+                          <span className={styles.codeHighlight}>
+                            function{" "}
+                          </span>
+                          createAwesomeProject() {`{`}
+                          {isCodeWindowMinimized && "...};"}
+                        </span>{" "}
+                        {/* Increased mt-2 to mt-4 */}
+                        {!isCodeWindowMinimized && (
+                          <>
+                            <span className={`ms-8 ${styles.codeLine}`}>
+                              <span className={styles.codeHighlight}>
+                                return{" "}
+                              </span>
+                              developer.skills.map(
+                              <span className={styles.codeHighlight}>s</span>{" "}
+                              =&gt; {`{`}
+                            </span>
+                            <span className={`ms-12 ${styles.codeLine}`}>
+                              <span className={styles.codeHighlight}>
+                                return{" "}
+                              </span>
+                              <span>s + &apos; magic&apos;</span>;
+                            </span>
+                            <span
+                              className={`ms-8 ${styles.codeLine}`}
+                            >{`}`}</span>
+                            <span className={`ms-4 ${styles.codeLine}`}>
+                              );
+                            </span>
+                            <span className={`${styles.codeLine}`}>{`}`}</span>
+                          </>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
-          }
+            </div>
+          )}
         </div>
       </div>
     </section>

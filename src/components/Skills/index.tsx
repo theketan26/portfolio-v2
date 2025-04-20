@@ -1,6 +1,6 @@
 // components/Skills.tsx
-import { useState, useEffect, useRef } from 'react';
-import CustomFollower from '../common/CursorFollower';
+import { useState, useEffect, useRef } from "react";
+import CustomFollower from "../common/CursorFollower";
 
 // Updated style definitions with spacing adjustments
 const styles = {
@@ -25,7 +25,7 @@ interface SkillCategories {
 }
 
 const Skills: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('technical');
+  const [activeCategory, setActiveCategory] = useState<string>("technical");
   const [displayedLines, setDisplayedLines] = useState<SkillCategories>({
     technical: [],
     soft: [],
@@ -39,27 +39,27 @@ const Skills: React.FC = () => {
 
   const skillCategories: SkillCategories = {
     technical: [
-      'Python - Backend & scripting powerhouse',
-      'JavaScript - Dynamic web development',
-      'React.js - Interactive UI components',
-      'Node.js - Server-side JavaScript',
-      'Django - Rapid Python web framework',
-      'SQL - Database management'
+      "Python - Backend & scripting powerhouse",
+      "JavaScript - Dynamic web development",
+      "React.js - Interactive UI components",
+      "Node.js - Server-side JavaScript",
+      "Django - Rapid Python web framework",
+      "SQL - Database management",
     ],
     soft: [
-      'Problem Solving - Tackling complex challenges',
-      'Communication - Clear & concise articulation',
-      'Teamwork - Collaborative success',
-      'Time Management - Efficient task handling',
-      'Adaptability - Thriving in change',
-      'Leadership - Guiding teams forward'
+      "Problem Solving - Tackling complex challenges",
+      "Communication - Clear & concise articulation",
+      "Teamwork - Collaborative success",
+      "Time Management - Efficient task handling",
+      "Adaptability - Thriving in change",
+      "Leadership - Guiding teams forward",
     ],
     tools: [
-      'VS Code - Code editing perfection',
-      'Git - Version control mastery',
-      'GitHub - Code collaboration hub',
-      'AWS - Cloud infrastructure',
-      'Linux - System administration',
+      "VS Code - Code editing perfection",
+      "Git - Version control mastery",
+      "GitHub - Code collaboration hub",
+      "AWS - Cloud infrastructure",
+      "Linux - System administration",
     ],
   };
 
@@ -68,30 +68,32 @@ const Skills: React.FC = () => {
     const handleScroll = () => {
       if (parallaxRef.current) {
         const scrollPosition = window.scrollY;
-        parallaxRef.current.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+        parallaxRef.current.style.transform = `translateY(${
+          scrollPosition * 0.2
+        }px)`;
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     // Typing animation for skills
     if (!isTerminalOpen || isTerminalHidden) return;
-    
-    setDisplayedLines({technical: [], soft: [], tools: []});
+
+    setDisplayedLines({ technical: [], soft: [], tools: [] });
     let lineIndex = 0;
     const typeSkills = () => {
       if (lineIndex < skillCategories[activeCategory].length) {
         setDisplayedLines((prev: SkillCategories) => ({
           ...prev,
           [activeCategory]: [
-           ...prev[activeCategory],
-            skillCategories[activeCategory][lineIndex-1],
+            ...prev[activeCategory],
+            skillCategories[activeCategory][lineIndex - 1],
           ],
         }));
         lineIndex++;
-        setTimeout(typeSkills, 300);
+        setTimeout(typeSkills, 200);
       }
     };
     typeSkills();
@@ -102,25 +104,45 @@ const Skills: React.FC = () => {
 
   return (
     <section id="skills" className={styles.skillsSection}>
-      <CustomFollower 
-        key='skill-section'
-        cursor='/ts-icon.svg' 
-        parentElementId='skills'
+      <CustomFollower
+        key="skill-section"
+        cursor="/ts-icon.svg"
+        parentElementId="skills"
       />
 
       {/* Parallax Background */}
-      <div ref={parallaxRef} className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-40">
-        <div className={`${styles.floatingBubble1} animate-pulse`} style={{ animationDuration: '6s' }}></div>
-        <div className={`${styles.floatingBubble2} animate-pulse`} style={{ animationDuration: '8s' }}></div>
-        <div className={`${styles.triangle} top-1/4 left-1/8 animate-bounce`} style={{ animationDuration: '5s' }}></div>
-        <div className={`${styles.square} bottom-1/4 right-1/5 animate-pulse`} style={{ animationDuration: '7s' }}></div>
-        <div className={`${styles.triangle} bottom-1/5 left-1/4 animate-bounce`} style={{ animationDuration: '4s' }}></div>
+      <div
+        ref={parallaxRef}
+        className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-40"
+      >
+        <div
+          className={`${styles.floatingBubble1} animate-pulse`}
+          style={{ animationDuration: "6s" }}
+        ></div>
+        <div
+          className={`${styles.floatingBubble2} animate-pulse`}
+          style={{ animationDuration: "8s" }}
+        ></div>
+        <div
+          className={`${styles.triangle} top-1/4 left-1/8 animate-bounce`}
+          style={{ animationDuration: "5s" }}
+        ></div>
+        <div
+          className={`${styles.square} bottom-1/4 right-1/5 animate-pulse`}
+          style={{ animationDuration: "7s" }}
+        ></div>
+        <div
+          className={`${styles.triangle} bottom-1/5 left-1/4 animate-bounce`}
+          style={{ animationDuration: "4s" }}
+        ></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
-            <p className="text-blue-600 dark:text-blue-400 font-medium">Command Center</p>
+            <p className="text-blue-600 dark:text-blue-400 font-medium">
+              Command Center
+            </p>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-indigo-400 w-fit mx-auto bg-clip-text text-transparent">
             Skills Terminal
@@ -138,7 +160,7 @@ const Skills: React.FC = () => {
                   setIsTerminalOpen(true);
                 }}
                 className={`${styles.categoryButton} ${
-                  activeCategory === category ? styles.activeCategoryButton : ''
+                  activeCategory === category ? styles.activeCategoryButton : ""
                 }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -152,33 +174,38 @@ const Skills: React.FC = () => {
             <div className={styles.terminalContainer}>
               <div className={styles.terminalHeader}>
                 <div className="flex items-center">
-                  <button 
+                  <button
                     className={`${styles.terminalDot} bg-red-500`}
                     onClick={() => setIsTerminalOpen(false)}
                   ></button>
-                  <button 
+                  <button
                     className={`${styles.terminalDot} bg-yellow-500`}
                     onClick={() => setIsTerminalMinimized(!isTerminalMinimized)}
                   ></button>
-                  <span 
+                  <span
                     className={`${styles.terminalDot} bg-green-500`}
                     onClick={() => setIsTerminalHidden(!isTerminalHidden)}
                   ></span>
                 </div>
-                <span className="text-xs text-blue-400 dark:text-cyan-400">skills@ketan:~$</span>
+                <span className="text-xs text-blue-400 dark:text-cyan-400">
+                  skills@ketan:~$
+                </span>
               </div>
               {!isTerminalHidden && (
                 <div ref={terminalRef} className={styles.terminalOutput}>
-                  {!isTerminalMinimized && displayedLines[activeCategory].map((line, index) => (
-                    <div key={index} className={styles.commandLine}>
-                      <span className={styles.prompt}>$</span>
-                      <span className={styles.commandText}>{line}</span>
-                    </div>
-                  ))}
+                  {!isTerminalMinimized &&
+                    displayedLines[activeCategory].map((line, index) => (
+                      <div key={index} className={styles.commandLine}>
+                        <span className={styles.prompt}>$</span>
+                        <span className={styles.commandText}>{line}</span>
+                      </div>
+                    ))}
                   {!isTerminalMinimized && (
                     <div className={styles.commandLine}>
                       <span className={styles.prompt}>$</span>
-                      <span className="animate-blink text-cyan-400 dark:text-blue-400">|</span>
+                      <span className="animate-blink text-cyan-400 dark:text-blue-400">
+                        |
+                      </span>
                     </div>
                   )}
                   {isTerminalMinimized && (
