@@ -1,6 +1,8 @@
 // components/Skills.tsx
 import { useState, useEffect, useRef } from "react";
 import CustomFollower from "../common/CursorFollower";
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { closeTerminal, toggleTerminalMinimized, toggleTerminalHidden, openTerminal } from '@/store/slices/terminalSlice';
 
 // Updated style definitions with spacing adjustments
 const styles = {
@@ -25,15 +27,16 @@ interface SkillCategories {
 }
 
 const Skills: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { isOpen: isTerminalOpen, isMinimized: isTerminalMinimized, isHidden: isTerminalHidden } = useAppSelector(
+    (state) => state.terminal
+  );
   const [activeCategory, setActiveCategory] = useState<string>("technical");
   const [displayedLines, setDisplayedLines] = useState<SkillCategories>({
     technical: [],
     soft: [],
     tools: [],
   });
-  const [isTerminalOpen, setIsTerminalOpen] = useState(true);
-  const [isTerminalMinimized, setIsTerminalMinimized] = useState(false);
-  const [isTerminalHidden, setIsTerminalHidden] = useState(false);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -157,7 +160,7 @@ const Skills: React.FC = () => {
                 key={category}
                 onClick={() => {
                   setActiveCategory(category);
-                  setIsTerminalOpen(true);
+                  dispatch(openTerminal());
                 }}
                 className={`${styles.categoryButton} ${
                   activeCategory === category ? styles.activeCategoryButton : ""
@@ -176,15 +179,15 @@ const Skills: React.FC = () => {
                 <div className="flex items-center">
                   <button
                     className={`${styles.terminalDot} bg-red-500`}
-                    onClick={() => setIsTerminalOpen(false)}
+                    onClick={() => dispatch(closeTerminal())}
                   ></button>
                   <button
                     className={`${styles.terminalDot} bg-yellow-500`}
-                    onClick={() => setIsTerminalMinimized(!isTerminalMinimized)}
+                    onClick={() => dispatch(toggleTerminalMinimized())}
                   ></button>
                   <span
                     className={`${styles.terminalDot} bg-green-500`}
-                    onClick={() => setIsTerminalHidden(!isTerminalHidden)}
+                    onClick={() => dispatch(toggleTerminalHidden())}
                   ></span>
                 </div>
                 <span className="text-xs text-blue-400 dark:text-cyan-400">

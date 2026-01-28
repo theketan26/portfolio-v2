@@ -1,8 +1,9 @@
 // components/Hero.tsx
-import { useState } from "react";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import CustomFollower from "../common/CursorFollower";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { closeMyCode, toggleMyCodeMinimized, toggleMyCodeHidden } from "@/store/slices/myCodeSlice";
 
 // Updated style definitions with increased spacing
 const styles = {
@@ -36,9 +37,10 @@ const styles = {
 };
 
 const Hero: React.FC = () => {
-  const [isCodeWindowOpen, setIsCodeWindowOpen] = useState(true);
-  const [isCodeWindowMinimized, setIsCodeWindowMinimized] = useState(false);
-  const [isCodeWindowHidden, setIsCodeWindowHidden] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isOpen: isMyCodeOpen, isMinimized: isMyCodeMinimized, isHidden: isMyCodeHidden } = useAppSelector(
+    (state) => state.myCode
+  );
 
   return (
     <section id="home" className={styles.heroSection}>
@@ -155,7 +157,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {isCodeWindowOpen && (
+          {isMyCodeOpen && (
             <div className="w-full md:w-1/2 flex justify-center md:justify-end">
               <div className={styles.visualContainer}>
                 {/* Animated code element */}
@@ -163,32 +165,30 @@ const Hero: React.FC = () => {
                   <div className={styles.codeHeader}>
                     <button
                       className={`${styles.codeDot} bg-red-500`}
-                      onClick={() => setIsCodeWindowOpen(false)}
+                      onClick={() => dispatch(closeMyCode())}
                     ></button>
                     <button
                       className={`${styles.codeDot} bg-yellow-500`}
-                      onClick={() =>
-                        setIsCodeWindowMinimized(!isCodeWindowMinimized)
-                      }
+                      onClick={() => dispatch(toggleMyCodeMinimized())}
                     ></button>
                     <span
                       className={`${styles.codeDot} bg-green-500`}
-                      onClick={() => setIsCodeWindowHidden(!isCodeWindowHidden)}
+                      onClick={() => dispatch(toggleMyCodeHidden())}
                     ></span>
                     <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
                       myCode.js
                     </span>
                   </div>
 
-                  {!isCodeWindowHidden && (
+                  {!isMyCodeHidden && (
                     <>
                       <div className={styles.codeBlock}>
                         <span className={`${styles.codeLine}`}>
                           <span className={styles.codeHighlight}>const</span>{" "}
                           developer = {`{`}
-                          {isCodeWindowMinimized && "...};"}
+                          {isMyCodeMinimized && "...};"}
                         </span>
-                        {!isCodeWindowMinimized && (
+                        {!isMyCodeMinimized && (
                           <>
                             <span className={`ms-4 ${styles.codeLine}`}>
                               name:{" "}
@@ -231,10 +231,10 @@ const Hero: React.FC = () => {
                             function{" "}
                           </span>
                           createAwesomeProject() {`{`}
-                          {isCodeWindowMinimized && "...};"}
+                          {isMyCodeMinimized && "...};"}
                         </span>{" "}
                         {/* Increased mt-2 to mt-4 */}
-                        {!isCodeWindowMinimized && (
+                        {!isMyCodeMinimized && (
                           <>
                             <span className={`ms-8 ${styles.codeLine}`}>
                               <span className={styles.codeHighlight}>

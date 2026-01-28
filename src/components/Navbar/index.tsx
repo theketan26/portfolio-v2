@@ -2,20 +2,19 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { toggleTheme } from '@/store/slices/themeSlice';
 
 interface NavLink {
   name: string;
   href: string;
 }
 
-interface NavbarProps {
-  darkMode: boolean;
-  setDarkMode: (darkMode: boolean) => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const darkMode = useAppSelector((state) => state.theme.darkMode);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
   }, []);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    dispatch(toggleTheme());
   };
 
   const navLinks: NavLink[] = [

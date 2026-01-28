@@ -1,6 +1,9 @@
 // components/Experience.tsx
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Briefcase, Award } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { closeSenior, toggleSeniorMinimized, toggleSeniorHidden } from '@/store/slices/seniorOpenSlice';
+import { closeEducation, toggleEducationMinimized, toggleEducationHidden } from '@/store/slices/educationOpenSlice';
 
 // Style definitions matching previous components
 const styles = {
@@ -22,15 +25,13 @@ const styles = {
 
 const Experience: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const [isSeniorOpen, setIsSeniorOpen] = useState(true);
-  const [isSeniorMinimized, setIsSeniorMinimized] = useState(false);
-  const [isSeniorHidden, setIsSeniorHidden] = useState(false);
-  // const [isJuniorOpen, setIsJuniorOpen] = useState(true);
-  // const [isJuniorMinimized, setIsJuniorMinimized] = useState(false);
-  // const [isJuniorHidden, setIsJuniorHidden] = useState(false);
-  const [isEducationOpen, setIsEducationOpen] = useState(true);
-  const [isEducationMinimized, setIsEducationMinimized] = useState(false);
-  const [isEducationHidden, setIsEducationHidden] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isOpen: isSeniorOpen, isMinimized: isSeniorMinimized, isHidden: isSeniorHidden } = useAppSelector(
+    (state) => state.seniorOpen
+  );
+  const { isOpen: isEducationOpen, isMinimized: isEducationMinimized, isHidden: isEducationHidden } = useAppSelector(
+    (state) => state.educationOpen
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,15 +74,15 @@ const Experience: React.FC = () => {
                 <div className="flex items-center">
                   <button 
                     className={`${styles.codeDot} bg-red-500`}
-                    onClick={() => setIsSeniorOpen(false)}
+                    onClick={() => dispatch(closeSenior())}
                   ></button>
                   <button 
                     className={`${styles.codeDot} bg-yellow-500`}
-                    onClick={() => setIsSeniorMinimized(!isSeniorMinimized)}
+                    onClick={() => dispatch(toggleSeniorMinimized())}
                   ></button>
                   <span 
                     className={`${styles.codeDot} bg-green-500`}
-                    onClick={() => setIsSeniorHidden(!isSeniorHidden)}
+                    onClick={() => dispatch(toggleSeniorHidden())}
                   ></span>
                 </div>
                 <span className="text-xs text-gray-500 dark:text-gray-400">techdomeSolutions.js</span>
@@ -151,15 +152,15 @@ const Experience: React.FC = () => {
                   <div className="flex items-center">
                     <button 
                       className={`${styles.codeDot} bg-red-500`}
-                      onClick={() => setIsEducationOpen(false)}
+                      onClick={() => dispatch(closeEducation())}
                     ></button>
                     <button 
                       className={`${styles.codeDot} bg-yellow-500`}
-                      onClick={() => setIsEducationMinimized(!isEducationMinimized)}
+                      onClick={() => dispatch(toggleEducationMinimized())}
                     ></button>
                     <span 
                       className={`${styles.codeDot} bg-green-500`}
-                      onClick={() => setIsEducationHidden(!isEducationHidden)}
+                      onClick={() => dispatch(toggleEducationHidden())}
                     ></span>
                   </div>
                   <span className="text-xs text-gray-500 dark:text-gray-400">education.js</span>

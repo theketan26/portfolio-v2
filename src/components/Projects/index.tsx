@@ -1,7 +1,9 @@
 // components/Projects.tsx
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Code } from 'lucide-react';
 import CustomFollower from '../common/CursorFollower';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { toggleProjectOpen, toggleProjectMinimized, toggleProjectHidden } from '@/store/slices/projectsOpenSlice';
 
 // Style definitions matching previous components
 const styles = {
@@ -48,9 +50,10 @@ const projects = [{
 
 const Projects: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const [openedProjects, setOpenedProjects] = useState<string[]>([]);
-  const [minimizedProjects, setMinimizedProjects] = useState<string[]>([]);
-  const [hiddenProjects, setHiddenProjects] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
+  const { openedProjects, minimizedProjects, hiddenProjects } = useAppSelector(
+    (state) => state.projectsOpen
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,30 +103,15 @@ const Projects: React.FC = () => {
                     <div className="flex items-center">
                       <button 
                         className={`${styles.codeDot} bg-red-500`}
-                        onClick={() => {
-                          if (openedProjects.includes(project.constName))
-                            setOpenedProjects(openedProjects.filter(p => p !== project.constName));
-                          else
-                            setOpenedProjects([...openedProjects, project.constName]);
-                        }}
+                        onClick={() => dispatch(toggleProjectOpen(project.constName))}
                       ></button>
                       <button 
                         className={`${styles.codeDot} bg-yellow-500`}
-                        onClick={() => {
-                          if (minimizedProjects.includes(project.constName))
-                            setMinimizedProjects(minimizedProjects.filter(p => p!== project.constName));
-                          else
-                            setMinimizedProjects([...minimizedProjects, project.constName]);
-                        }}
+                        onClick={() => dispatch(toggleProjectMinimized(project.constName))}
                       ></button>
                       <span 
                         className={`${styles.codeDot} bg-green-500`}
-                        onClick={() => {
-                          if (hiddenProjects.includes(project.constName))
-                            setHiddenProjects(hiddenProjects.filter(p => p!== project.constName));
-                          else
-                            setHiddenProjects([...hiddenProjects, project.constName]);
-                        }}
+                        onClick={() => dispatch(toggleProjectHidden(project.constName))}
                       ></span>
                     </div>
                     <span className="text-xs text-gray-500 dark:text-gray-400">{project.fileName}</span>

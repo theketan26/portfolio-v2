@@ -1,5 +1,7 @@
 // components/About.tsx
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { closeCodeWizard, toggleCodeWizardMinimized, toggleCodeWizardHidden } from '@/store/slices/codeWizardSlice';
 
 const styles = {
   aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-800 to-indigo-900 dark:from-gray-950 dark:to-indigo-950`,
@@ -19,9 +21,10 @@ const styles = {
 
 const About: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const [isCodeWindowOpen, setIsCodeWindowOpen] = useState(true);
-  const [isCodeWindowMinimized, setIsCodeWindowMinimized] = useState(false);
-  const [isCodeWindowHidden, setIsCodeWindowHidden] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isOpen: isCodeWizardOpen, isMinimized: isCodeWizardMinimized, isHidden: isCodeWizardHidden } = useAppSelector(
+    (state) => state.codeWizard
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,31 +95,31 @@ const About: React.FC = () => {
           </div>
 
           <div className="w-full md:w-1/2 flex justify-center">
-            {isCodeWindowOpen && (
+            {isCodeWizardOpen && (
               <div className={styles.codeContainer}>
                 <div className={styles.codeHeader}>
                   <div className="flex items-center">
                     <button 
                       className={`${styles.codeDot} bg-red-500`} 
-                      onClick={() => setIsCodeWindowOpen(false)}
+                      onClick={() => dispatch(closeCodeWizard())}
                     ></button>
                     <button 
                       className={`${styles.codeDot} bg-yellow-500`} 
-                      onClick={() => setIsCodeWindowMinimized(!isCodeWindowMinimized)}
+                      onClick={() => dispatch(toggleCodeWizardMinimized())}
                     ></button>
                     <span 
                       className={`${styles.codeDot} bg-green-500`}
-                      onClick={() => setIsCodeWindowHidden(!isCodeWindowHidden)}
+                      onClick={() => dispatch(toggleCodeWizardHidden())}
                     ></span>
                   </div>
                   <span className="text-xs text-gray-500 dark:text-gray-400">codeWizard.js</span>
                 </div>
-                {!isCodeWindowHidden && (
+                {!isCodeWizardHidden && (
                   <div className={styles.codeBlock}>
                     <span className={styles.codeLine}>
-                      <span className={styles.codeHighlight}>class</span> SoftwareEngineer {` {`}{isCodeWindowMinimized && '...};'}
+                      <span className={styles.codeHighlight}>class</span> SoftwareEngineer {` {`}{isCodeWizardMinimized && '...};'}
                     </span>
-                    {!isCodeWindowMinimized && (
+                    {!isCodeWizardMinimized && (
                       <>
                         <span className={`${styles.codeLine} pl-8`}>
                           constructor() {` {`}
