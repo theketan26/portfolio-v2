@@ -45,6 +45,19 @@ const projects = [{
     ],
     techStack: ['Python', 'Selenium', 'Tkinter'],
     link: 'private',
+  }, {
+    fileName: 'bikecare.js',
+    constName: 'bikecare',
+    name: 'BikeCare',
+    description: 'Easy to use bike maintenance and service management software.',
+    features: [
+      'Track and manage bike maintenance schedules.', 
+      'Manage service records and history.',
+      'User-friendly interface for easy navigation.',
+      'Supports multiple bikes and users.'
+    ],
+    techStack: ['Typescript', 'NextJS', 'TailwindCSS', 'PostgreSQL'],
+    link: 'https://bikecare.vercel.app/',
   },
 ]
 
