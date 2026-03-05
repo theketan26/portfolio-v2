@@ -7,7 +7,7 @@ import { closeEducation, toggleEducationMinimized, toggleEducationHidden } from 
 
 // Style definitions matching previous components
 const styles = {
-  experienceSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-800 to-cyan-900 dark:from-gray-950 dark:to-cyan-950`,
+  experienceSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-200 to-cyan-200 dark:from-gray-950 dark:to-cyan-950`,
   floatingBubble1: `absolute top-1/5 left-1/5 w-72 h-72 bg-blue-300/20 dark:bg-blue-600/15 rounded-full blur-3xl`,
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-96 h-96 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-cyan-800`,
@@ -60,7 +60,7 @@ const Experience: React.FC = () => {
           <div className="inline-block px-4 py-2 bg-blue-100 dark:bg-cyan-900/30 rounded-full mb-4">
             <p className="text-blue-600 dark:text-cyan-400 font-medium">Work Log</p>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-white to-blue-600 dark:to-cyan-500 w-fit mx-auto bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-gray-500 dark:from-gray-200 to-blue-600 dark:to-cyan-500 w-fit mx-auto bg-clip-text text-transparent">
             Experience Timeline
           </h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4"></div>

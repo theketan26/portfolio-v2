@@ -35,6 +35,16 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="#skills" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+                  Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="#experience" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+                  Experience
+                </Link>
+              </li>
+              <li>
                 <Link href="#projects" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
                   Projects
                 </Link>

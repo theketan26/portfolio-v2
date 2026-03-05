@@ -31,7 +31,7 @@ const projects = [{
       'Analyze data of any player.'
     ],
     techStack: ['Python', 'Pandas'],
-    link: 'https://github.com/theketan26/cricket-data-analysis',
+    githubLink: 'https://github.com/theketan26/cricket-data-analysis',
   }, {
     fileName: 'pmfbyFormFeeder.js',
     constName: 'pmbfyFormFeeder',
@@ -44,7 +44,7 @@ const projects = [{
       'Multiple processes and instances at once, for efficiency.'
     ],
     techStack: ['Python', 'Selenium', 'Tkinter'],
-    link: 'private',
+    githubLink: 'private',
   }, {
     fileName: 'bikecare.js',
     constName: 'bikecare',
@@ -57,7 +57,22 @@ const projects = [{
       'Supports multiple bikes and users.'
     ],
     techStack: ['Typescript', 'NextJS', 'TailwindCSS', 'PostgreSQL'],
+    githubLink: 'private',
     link: 'https://bikecare.vercel.app/',
+  }, {
+    fileName: 'romanticApps.tsx',
+    constName: 'romanticApps',
+    name: 'Your Story Apps',
+    description: 'Full-stack web application for creating and sharing personalized romantic experiences using customizable HTML templates.',
+    features: [
+      'Dynamic HTML template engine with live preview.', 
+      'Secure authentication and passkey-protected sharing.',
+      'Azure Blob Storage for image uploads.',
+      'Analytics dashboard with visitor tracking.'
+    ],
+    techStack: ['Next.js', 'React', 'TypeScript', 'TailwindCSS', 'PostgreSQL', 'Azure Blob Storage', 'Radix UI'],
+    githubLink: 'https://github.com/theketan26/v-day',
+    link: 'https://yourstoryapps.vercel.app',
   },
 ]
 
@@ -168,8 +183,15 @@ const Projects: React.FC = () => {
                             ]
                           </span>
                           <span className={`${styles.codeLine} pl-8`}>
-                            link: {project.link === 'private' ? project.link : <a href={project.link}>{project.link}</a>} 
+                            githubLink: {project.githubLink === 'private' ? project.githubLink : <a href={project.githubLink}>{project.githubLink}</a>} 
                           </span>
+                          {
+                            project.link && (
+                              <span className={`${styles.codeLine} pl-8`}>
+                                link: {project.link === 'private' ? project.link : <a href={project.link}>{project.link}</a>} 
+                              </span>
+                            )
+                          }
                           <span className={styles.codeLine}>{`}`}</span>
                         </>
                       )}

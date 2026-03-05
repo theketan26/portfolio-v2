@@ -2,9 +2,10 @@
 import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeCodeWizard, toggleCodeWizardMinimized, toggleCodeWizardHidden } from '@/store/slices/codeWizardSlice';
+import { Download } from 'lucide-react';
 
 const styles = {
-  aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-800 to-indigo-900 dark:from-gray-950 dark:to-indigo-950`,
+  aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-100 to-indigo-200 dark:from-gray-950 dark:to-indigo-950`,
   floatingBubble1: `absolute top-1/5 left-1/5 w-72 h-72 bg-indigo-300/20 dark:bg-indigo-600/15 rounded-full blur-3xl`,
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-96 h-96 bg-purple-300/20 dark:bg-purple-600/15 rounded-full blur-3xl opacity-80`,
   floatingBubble3: `absolute top-1/3 right-1/4 w-64 h-64 bg-blue-300/20 dark:bg-blue-600/15 rounded-full blur-3xl`,
@@ -58,7 +59,7 @@ const About: React.FC = () => {
           <div className="inline-block px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-4">
             <p className="text-indigo-600 dark:text-indigo-400 font-medium">Get to Know Me</p>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-white to-indigo-400 w-fit mx-auto bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-gray-500 to-indigo-400 w-fit mx-auto bg-clip-text text-transparent">
             Ketan <span className="">Solanki</span>
           </h2>
           <div className="w-24 h-1 bg-indigo-500 mx-auto mt-4"></div>
@@ -66,14 +67,23 @@ const About: React.FC = () => {
 
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="w-full md:w-1/2">
-            <h3 className="text-3xl font-bold text-white mb-6">My Story</h3>
-            <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+            <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">My Story</h3>
+            <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">
               I&apos;m Ketan Solanki, a 22-year-old tech enthusiast who turned my childhood curiosity about computers into a career in software engineering.
             </p>
-            <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+            <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">
               As a Software Developer Engineer at <a href="https://techdome.io/" target='_blank'>Techdome Solutions</a>, I craft solutions with a strong focus on core skill in programming language. My love for technology extends beyond coding—I’m equally fascinated by computer hardware and how it powers our digital world.
             </p>
-
+            <a
+              href="https://ketanpersonal.blob.core.windows.net/resume/ketan-solanki-resume.pdf?sp=r&st=2026-03-04T07:33:43Z&se=2027-03-04T15:48:43Z&spr=https&sv=2024-11-04&sr=b&sig=mSQrfxmG87Z%2Fqct9lu0nugdt47RXSn%2FrqkcEAlGGNuo%3D"
+              download="Ketan-Solanki-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
+            >
+              <Download size={20} />
+              Download Resume
+            </a>
             {/* <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="flex items-center">
                 <Code size={24} className="text-indigo-400 mr-3" />

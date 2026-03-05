@@ -1,7 +1,6 @@
 "use client";
 
-import { Position, DefaultPosition } from "@/Interfaces/Positions";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const CustomFollower = ({
   cursor = "/react-icon.svg",
@@ -11,10 +10,10 @@ const CustomFollower = ({
   parentElementId?: string;
 }) => {
   const [cursorPosition, setCursorPosition] =
-    useState<Position>(DefaultPosition);
+    useState<any>({ x: 0, y: 0 });
 
   const cursorFollow = async (e: MouseEvent) => {
-    const clientPosition: Position = DefaultPosition;
+    const clientPosition: any = { x: 0, y: 0 };
 
     if (parentElementId) {
       const parentElement = document.getElementById(parentElementId);

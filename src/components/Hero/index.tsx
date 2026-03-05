@@ -1,9 +1,17 @@
 // components/Hero.tsx
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
+import { Kaushan_Script } from "next/font/google";
 import CustomFollower from "../common/CursorFollower";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { closeMyCode, toggleMyCodeMinimized, toggleMyCodeHidden } from "@/store/slices/myCodeSlice";
+import SocialButtons from "../SocialButtons";
+
+const bitcountSingle = Kaushan_Script({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 // Updated style definitions with increased spacing
 const styles = {
@@ -41,6 +49,30 @@ const Hero: React.FC = () => {
   const { isOpen: isMyCodeOpen, isMinimized: isMyCodeMinimized, isHidden: isMyCodeHidden } = useAppSelector(
     (state) => state.myCode
   );
+  
+  const socialLinks = [
+    {
+      icon: (
+        <Github size={24} />
+      ),
+      href: process.env.NEXT_PUBLIC_GITHUB_URL || "#",
+      label: "GitHub"
+    },
+    {
+      icon: (
+        <Linkedin size={24} />
+      ),
+      href: process.env.NEXT_PUBLIC_LINKEDIN_URL || "#",
+      label: "LinkedIn"
+    },
+    {
+      icon: (
+        <Mail size={24} />
+      ),
+      href: `mailto:${process.env.NEXT_PUBLIC_EMAIL}` || "#",
+      label: "Email"
+    }
+  ];
 
   return (
     <section id="home" className={styles.heroSection}>
@@ -97,7 +129,7 @@ const Hero: React.FC = () => {
               </p>
             </div>
 
-            <h1 className="md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-800 bg-clip-text text-transparent mb-8 w-max">
+            <h1 className={`md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-800 bg-clip-text text-transparent mb-8 w-max ${bitcountSingle.className}`}>
               Ketan Solanki
             </h1>
 
@@ -130,9 +162,8 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="flex space-x-8">
-              {" "}
-              {/* Increased space-x-6 to space-x-8 */}
-              <a
+              <SocialButtons buttons={socialLinks} />
+              {/* <a
                 href={process.env.NEXT_PUBLIC_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -153,7 +184,7 @@ const Hero: React.FC = () => {
                 className={styles.socialIcon}
               >
                 <Mail size={24} />
-              </a>
+              </a> */}
             </div>
           </div>
 
