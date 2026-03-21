@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
                   </Link>
                 ))}
                 <a
-                  href="https://ketanpersonal.blob.core.windows.net/resume/ketan-solanki-resume.pdf?sp=r&st=2026-03-04T07:33:43Z&se=2027-03-04T15:48:43Z&spr=https&sv=2024-11-04&sr=b&sig=mSQrfxmG87Z%2Fqct9lu0nugdt47RXSn%2FrqkcEAlGGNuo%3D"
+                  href="/ketan-solanki-resume.pdf"
                   download="Ketan-Solanki-Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
               <a
-                href="https://ketanpersonal.blob.core.windows.net/resume/ketan-solanki-resume.pdf?sp=r&st=2026-03-04T07:33:43Z&se=2027-03-04T15:48:43Z&spr=https&sv=2024-11-04&sr=b&sig=mSQrfxmG87Z%2Fqct9lu0nugdt47RXSn%2FrqkcEAlGGNuo%3D"
+                href="/ketan-solanki-resume.pdf"
                 download="Ketan-Solanki-Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"

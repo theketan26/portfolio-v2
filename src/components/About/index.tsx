@@ -75,7 +75,7 @@ const About: React.FC = () => {
               As a Software Developer Engineer at <a href="https://techdome.io/" target='_blank'>Techdome Solutions</a>, I craft solutions with a strong focus on core skill in programming language. My love for technology extends beyond coding—I’m equally fascinated by computer hardware and how it powers our digital world.
             </p>
             <a
-              href="https://ketanpersonal.blob.core.windows.net/resume/ketan-solanki-resume.pdf?sp=r&st=2026-03-04T07:33:43Z&se=2027-03-04T15:48:43Z&spr=https&sv=2024-11-04&sr=b&sig=mSQrfxmG87Z%2Fqct9lu0nugdt47RXSn%2FrqkcEAlGGNuo%3D"
+              href="/ketan-solanki-resume.pdf"
               download="Ketan-Solanki-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
