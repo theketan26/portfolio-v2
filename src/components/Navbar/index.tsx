@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Sun, Moon, Download } from "lucide-react";
 import TorchToggle from '../TorchToggle';
+import AnimatedButton from '../AnimatedButton';
 
 interface NavLink {
   name: string;
@@ -67,10 +68,18 @@ const Navbar: React.FC = () => {
                   download="Ketan-Solanki-Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 px-4 py-2 rounded-full transition-colors"
                 >
-                  <Download size={16} />
-                  Resume
+                  <AnimatedButton
+                    gradientColorOne="#155dfc"
+                    gradientColorTwo="#ffffff"
+                    backgroundColor="#1F2937"
+                    textColor="#F3F4F6"
+                  >
+                    <span className="flex items-center gap-3">
+                      <Download size={16} />
+                      Resume
+                    </span>
+                  </AnimatedButton>
                 </a>
                 {/* <button
                   onClick={toggleDarkMode}
@@ -112,6 +121,7 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
+              
               <a
                 href="/ketan-solanki-resume.pdf"
                 download="Ketan-Solanki-Resume.pdf"

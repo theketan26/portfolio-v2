@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeCodeWizard, toggleCodeWizardMinimized, toggleCodeWizardHidden } from '@/store/slices/codeWizardSlice';
 import { Download } from 'lucide-react';
+import AnimatedButton from '../AnimatedButton';
 
 const styles = {
   aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-100 to-indigo-200 dark:from-gray-950 dark:to-indigo-950`,
@@ -79,10 +80,17 @@ const About: React.FC = () => {
               download="Ketan-Solanki-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
             >
-              <Download size={20} />
-              Download Resume
+              <AnimatedButton
+                gradientColorOne="#155dfc"
+                gradientColorTwo="#ffffff"
+                backgroundColor="#1F2937"
+                textColor="#F3F4F6"
+              >
+                <span className="flex items-center gap-3">
+                  Download Resume
+                </span>
+              </AnimatedButton>
             </a>
             {/* <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="flex items-center">

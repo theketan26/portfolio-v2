@@ -1,0 +1,26 @@
+@keyframes rotating-border {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.animated-btn-border {
+  background: linear-gradient(
+    0deg,
+    var(--gradient-color-one) 25%,
+    var(--gradient-color-two) 75%
+  );
+  animation: rotating-border 2s linear infinite;
+  will-change: transform;
+}
+
+/* Inner content responsive styling */
+.animated-btn:hover .animated-btn-inner,
+.animated-btn:focus .animated-btn-inner {
+  border-radius: 1.2em;
+  padding: 0.8em 1.8em;
+}
+
+.animated-btn:active .animated-btn-inner {
+  padding: 0.6em 1.6em;
+}
