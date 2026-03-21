@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeCodeWizard, toggleCodeWizardMinimized, toggleCodeWizardHidden } from '@/store/slices/codeWizardSlice';
 import { Download } from 'lucide-react';
 import AnimatedButton from '../AnimatedButton';
+import ResumeButton from '../ResumeButton';
+import { calculateAge } from '@/utils/dateUtils';
 
 const styles = {
   aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-100 to-indigo-200 dark:from-gray-950 dark:to-indigo-950`,
@@ -40,6 +42,8 @@ const About: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  const age = calculateAge('2002-10-26');
 
   return (
     <section id="about" className={styles.aboutSection}>
@@ -70,28 +74,13 @@ const About: React.FC = () => {
           <div className="w-full md:w-1/2">
             <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">My Story</h3>
             <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">
-              I&apos;m Ketan Solanki, a 22-year-old tech enthusiast who turned my childhood curiosity about computers into a career in software engineering.
+              I&apos;m Ketan Solanki, a {age}-year-old tech enthusiast who turned my childhood curiosity about computers into a career in software engineering.
             </p>
             <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">
               As a Software Developer Engineer at <a href="https://techdome.io/" target='_blank'>Techdome Solutions</a>, I craft solutions with a strong focus on core skill in programming language. My love for technology extends beyond coding—I’m equally fascinated by computer hardware and how it powers our digital world.
             </p>
-            <a
-              href="/ketan-solanki-resume.pdf"
-              download="Ketan-Solanki-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <AnimatedButton
-                gradientColorOne="#155dfc"
-                gradientColorTwo="#ffffff"
-                backgroundColor="#1F2937"
-                textColor="#F3F4F6"
-              >
-                <span className="flex items-center gap-3">
-                  Download Resume
-                </span>
-              </AnimatedButton>
-            </a>
+            
+            <ResumeButton withoutIcon />
             {/* <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="flex items-center">
                 <Code size={24} className="text-indigo-400 mr-3" />
@@ -146,7 +135,7 @@ const About: React.FC = () => {
                           this.name = <span className={`${styles.codeHighlight}`}>&apos;Ketan Solanki&apos;</span>;
                         </span>
                         <span className={`${styles.codeLine} pl-12`}>
-                          this.age = <span className={`${styles.codeHighlight}`}>22</span>;
+                          this.age = <span className={`${styles.codeHighlight}`}>{age}</span>;
                         </span>
                         <span className={`${styles.codeLine} pl-12`}>
                           this.title = <span className={`${styles.codeHighlight}`}>&apos;Software Developer Engineer&apos;</span>;

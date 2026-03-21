@@ -76,9 +76,7 @@ const Footer: React.FC = () => {
         
         {/* Bottom Section */}
         <div className="pt-8 mt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            © {new Date().getFullYear()} Ketan Solanki. All rights reserved.
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
           
           <button
             onClick={scrollToTop}

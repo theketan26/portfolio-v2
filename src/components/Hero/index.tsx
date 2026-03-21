@@ -133,7 +133,7 @@ const Hero: React.FC = () => {
               Ketan Solanki
             </h1>
 
-            <div className="h-14 mb-8">
+            <div className="h-14">
               <span className="text-2xl sm:text-3xl font-bold text-gray-700 dark:text-gray-300 flex items-center whitespace-nowrap">
                 I am
                 <span className="text-blue-600 dark:text-blue-500 mx-2">
@@ -144,13 +144,11 @@ const Hero: React.FC = () => {
             </div>
 
             <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mb-10 leading-relaxed">
-              {" "}
               {/* Increased mb-8 to mb-10 */}
-              Making clean code and reliable apps with Programming Language(s).
+              Writing clean and reliable code.
             </p>
 
             <div className="flex flex-wrap gap-6 mb-10">
-              {" "}
               {/* Increased gap-4 to gap-6, mb-8 to mb-10 */}
               <Link href="#contact" className={styles.primaryButton}>
                 Contact Me <ArrowRight className="ml-3" size={18} />{" "}
@@ -246,12 +244,12 @@ const Hero: React.FC = () => {
                             <span className={`ms-4 ${styles.codeLine}`}>
                               passion:{" "}
                               <span className={styles.codeHighlight}>
-                                &apos;Building useful apps&apos;
+                                &apos;building apps&apos;
                               </span>
                               ,
                             </span>
                             <span className={`ms-4 ${styles.codeLine}`}>
-                              coffee:{" "}
+                              tea:{" "}
                               <span className={styles.codeHighlight}>true</span>
                             </span>
                             <span className={`${styles.codeLine}`}>{`}`};</span>
@@ -279,7 +277,7 @@ const Hero: React.FC = () => {
                               <span className={styles.codeHighlight}>
                                 return{" "}
                               </span>
-                              <span>s + &apos; magic&apos;</span>;
+                              <span>s + &apos; master&apos;</span>;
                             </span>
                             <span
                               className={`ms-8 ${styles.codeLine}`}
