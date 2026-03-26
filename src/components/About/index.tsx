@@ -70,7 +70,7 @@ const About: React.FC = () => {
           <div className="w-24 h-1 bg-indigo-500 mx-auto mt-4"></div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-12 items-center">
+        <div className="flex flex-col lg:flex-row gap-12 items-center">
           <div className="w-full md:w-1/2">
             <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">My Story</h3>
             <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">

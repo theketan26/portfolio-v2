@@ -1,7 +1,7 @@
 // components/Navbar.tsx
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { toggleTheme } from '@/store/slices/themeSlice';
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import TorchToggle from '../TorchToggle';
@@ -14,17 +14,23 @@ interface NavLink {
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [scrolled, setScrolled] = useState<boolean>(false);
+  const navRef = useRef<HTMLElement | null>(null);
   const darkMode = useAppSelector((state) => state.theme.darkMode);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   const toggleDarkMode = () => {
     dispatch(toggleTheme());
@@ -42,7 +48,8 @@ const Navbar: React.FC = () => {
   return (
     <div>
       <nav
-        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 dark:bg-white/10 bg-indigo-900/10 dark: backdrop-blur-md rounded-full mt-5`}
+        ref={navRef}
+        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 dark:bg-white/10 bg-indigo-900/10 dark: backdrop-blur-md md:rounded-full rounded-3xl mt-5 transition-all duration-300`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
@@ -64,25 +71,13 @@ const Navbar: React.FC = () => {
                   </Link>
                 ))}
                 <ResumeButton />
-                {/* <button
-                  onClick={toggleDarkMode}
-                  className="text-gray-700 dark:text-gray-300"
-                >
-                  {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                </button> */}
               </div>
             </div>
 
-            <div className="flex md:hidden">
-              <button
-                onClick={toggleDarkMode}
-                className="mr-2 text-gray-700 dark:text-gray-300"
-              >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
+            <div className="flex w-full md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300"
+                className="w-full inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 cursor-pointer"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -92,8 +87,8 @@ const Navbar: React.FC = () => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="md:hidden bg-trasparent rounded-b-3xl shadow-lg">
+            <div className="px-6 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -105,7 +100,7 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
               
-              <div onClick={() => setIsOpen(false)}>
+              <div onClick={() => setIsOpen(false)} className='mt-5'>
                 <ResumeButton />
               </div>
             </div>
@@ -113,7 +108,7 @@ const Navbar: React.FC = () => {
         )}
       </nav>
 
-      <div className="fixed top-10 right-10 z-20 hidden md:block">
+      <div className="fixed top-10 right-10 z-20">
         <TorchToggle 
           checked={darkMode} 
           onChange={toggleDarkMode}
