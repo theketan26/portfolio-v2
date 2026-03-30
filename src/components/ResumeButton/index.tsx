@@ -12,7 +12,7 @@ const ResumeButton: React.FC<ResumeButtonProps> = ({ className, withoutIcon = fa
   
   return (
     <a
-      href="/ketan-solanki-resume.pdf"
+      href="https://knbuzoidgdotpolttair.supabase.co/storage/v1/object/public/resume/ketan-solanki-resume.pdf"
       download="ketan-solanki-resume.pdf"
       target="_blank"
       rel="noopener noreferrer"

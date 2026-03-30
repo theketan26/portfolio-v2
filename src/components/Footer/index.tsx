@@ -10,6 +10,13 @@ const Footer: React.FC = () => {
     });
   };
 
+  const date = process.env.NEXT_PUBLIC_LAST_COMMIT_DATE;
+  const longFormat = date ? new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+  }).format(new Date(date)) : null;
+
   return (
     <footer className="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -76,7 +83,11 @@ const Footer: React.FC = () => {
         
         {/* Bottom Section */}
         <div className="pt-8 mt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
+            {
+              longFormat && `Last updated: ${longFormat}`
+            }
+          </p>
           
           <button
             onClick={scrollToTop}
