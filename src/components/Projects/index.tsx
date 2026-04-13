@@ -46,9 +46,9 @@ const projects = [{
     techStack: ['Python', 'Selenium', 'Tkinter'],
     githubLink: 'private',
   }, {
-    fileName: 'bikecare.js',
-    constName: 'bikecare',
-    name: 'BikeCare',
+    fileName: 'gearlog.js',
+    constName: 'gearlog',
+    name: 'GearLog',
     description: 'Easy to use bike maintenance and service management software.',
     features: [
       'Track and manage bike maintenance schedules.', 
@@ -58,10 +58,10 @@ const projects = [{
     ],
     techStack: ['Typescript', 'NextJS', 'TailwindCSS', 'PostgreSQL'],
     githubLink: 'private',
-    link: 'https://bikecare.vercel.app/',
+    link: 'https://gearlog.in/',
   }, {
-    fileName: 'romanticApps.tsx',
-    constName: 'romanticApps',
+    fileName: 'your-story-apps.tsx',
+    constName: 'yourStoryApps',
     name: 'Your Story Apps',
     description: 'Full-stack web application for creating and sharing personalized romantic experiences using customizable HTML templates.',
     features: [
@@ -71,7 +71,7 @@ const projects = [{
       'Analytics dashboard with visitor tracking.'
     ],
     techStack: ['Next.js', 'React', 'TypeScript', 'TailwindCSS', 'PostgreSQL', 'Azure Blob Storage', 'Radix UI'],
-    githubLink: 'https://github.com/theketan26/v-day',
+    githubLink: 'https://github.com/theketan26/your-story-apps',
     link: 'https://yourstoryapps.vercel.app',
   },
 ]
