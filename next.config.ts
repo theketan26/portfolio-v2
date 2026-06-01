@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
+// next.config.js
+const { execSync } = require('child_process');
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const lastCommitDate = execSync('git log -1 --format=%cI').toString().trim();
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  env: {
+    NEXT_PUBLIC_LAST_COMMIT_DATE: lastCommitDate,
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

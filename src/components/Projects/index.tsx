@@ -18,6 +18,12 @@ const styles = {
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-80 h-80 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-cyan-800`,
   square: `absolute w-16 h-16 rotate-45 border-4 border-cyan-200 dark:border-cyan-800`,
+  codeContainer: `code-container opacity-0 translate-y-4 font-(family-name:--font-geist-mono) relative bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-xl p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 transform max-w-2xl w-full transition-all duration-700`,
+  codeHeader: `flex items-center justify-between mb-4`,
+  codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
+  codeBlock: `font-mono text-sm text-gray-800 dark:text-gray-300 leading-relaxed`,
+  codeLine: `block mb-1 pl-4 border-l-2 border-blue-400 dark:border-cyan-600`,
+  codeHighlight: `text-blue-600 dark:text-cyan-400`,
   techTag: `inline-block px-2 py-0.5 bg-blue-100 dark:bg-cyan-900/30 text-blue-800 dark:text-cyan-300 rounded-full text-xs mr-2 mb-1`,
 };
 
@@ -143,6 +149,26 @@ const Projects: React.FC = () => {
   );
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("opacity-0", "translate-y-4");
+            entry.target.classList.add("translate-y-0", "opacity-100");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+
+    const elements = document.querySelectorAll(".code-container");
+
+    elements.forEach((element) => observer.observe(element));
+    return () => elements.forEach((element) => observer.unobserve(element));
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (parallaxRef.current) {
         const scrollPosition = window.scrollY;
@@ -197,7 +223,7 @@ const Projects: React.FC = () => {
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4"></div>
         </div>
 
-        <div className="mx-auto grid grid-cols-2 gap-8">
+        <div className="mx-auto grid xl:grid-cols-2 grid-cols-1 gap-8">
           {projects.map((project, index) => (
             <BashWindow
               onClose={() => dispatch(toggleProjectOpen(project.constName))}
