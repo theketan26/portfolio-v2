@@ -168,7 +168,7 @@ const Projects: React.FC = () => {
               }
               key={index}
               isOpenProp={!openedProjects.includes(project.constName)}
-              isHiddenProp={!hiddenProjects.includes(project.constName)}
+              isHiddenProp={hiddenProjects.includes(project.constName)}
               isMinimizedProp={minimizedProjects.includes(project.constName)}
             >
               {(isMinimized, codeStyle) => (

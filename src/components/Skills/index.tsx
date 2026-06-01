@@ -169,10 +169,10 @@ const Skills: React.FC = () => {
             onClose={() => dispatch(closeTerminal())}
             onMinimized={() => dispatch(toggleTerminalMinimized())}
             onHidden={() => dispatch(toggleTerminalHidden())}
-            containerClass="md:w-full md:justify-center h-full"
-            codeContainerClass="h-full max-w-full !min-w-full md:w-full"
-            codeBlockClass="h-full"
-            visualContainerClass="h-full"
+            containerClass="md:w-full md:justify-center h-auto"
+            codeContainerClass="h-auto max-w-full !min-w-full md:w-auto"
+            codeBlockClass="h-auto"
+            visualContainerClass="h-auto"
           >
             {(isMinimized) => (
               <>
@@ -180,8 +180,8 @@ const Skills: React.FC = () => {
                   <div className="grid md:grid-cols-2 h-full gap-5">
                     {Object.keys(skillCategories).map((category) => (
                       <div key={category} className={`flex h-full flex-col`}>
-                        <div className="flex gap-5">
-                          $
+                        <div className="flex gap-2">
+                          <span className="text-cyan-400">$</span>
                           <span className="text-white">
                             {(
                               category.charAt(0).toUpperCase() +
@@ -189,38 +189,20 @@ const Skills: React.FC = () => {
                             ).replaceAll("_", " ")}
                           </span>
                         </div>
-                        <div className="flex-wrap gap-3 flex mt-5 mb-8">
-                          {skillCategories[category].map((skill) => (
-                            <div key={skill} className="p-2 bg-gray-700/50">
-                              {skill}
-                            </div>
-                          ))}
-                        </div>
+                        {isMinimized ? (
+                          <>[...]</>
+                        ) : (
+                          <div className="flex-wrap gap-3 flex mt-5 mb-8">
+                            {skillCategories[category].map((skill) => (
+                              <div key={skill} className="p-2 bg-gray-700/50">
+                                {skill}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
-
-                  {/*{!isMinimized &&
-                    displayedLines[activeCategory].map((line, index) => (
-                      <div key={index} className={styles.commandLine}>
-                        <span className={styles.prompt}>$</span>
-                        <span className={styles.commandText}>{line}</span>
-                      </div>
-                    ))}
-                  {!isMinimized && (
-                    <div className={styles.commandLine}>
-                      <span className={styles.prompt}>$</span>
-                      <span className="animate-blink text-cyan-400 dark:text-blue-400">
-                        |
-                      </span>
-                    </div>
-                  )}
-                  {isMinimized && (
-                    <div className={styles.commandLine}>
-                      <span className={styles.prompt}>$</span>
-                      <span className={styles.commandText}>[Minimized]</span>
-                    </div>
-                  )}*/}
                 </div>
               </>
             )}

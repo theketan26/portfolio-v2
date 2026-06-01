@@ -68,7 +68,7 @@ export default function BashWindow({
             </span>
           </div>
 
-          {(!isHidden || !isHiddenProp) && (
+          {!(isHidden || isHiddenProp) && (
             <div className={styles.codeBlock + " " + codeBlockClass}>
               {children(isMinimized || isMinimizedProp, styles)}
             </div>
