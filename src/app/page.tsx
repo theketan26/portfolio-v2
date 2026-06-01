@@ -14,7 +14,6 @@ import { Toaster } from "react-hot-toast";
 import { showCustomToast } from "@/components/common/CustomToast";
 import { useAppSelector } from "@/store/hooks";
 import Taskbar from "@/components/common/Taskbar";
-import BashWindow from "@/components/BashWindow";
 
 export default function Home() {
   const darkMode = useAppSelector((state) => state.theme.darkMode);

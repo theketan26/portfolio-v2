@@ -1,7 +1,6 @@
 // components/Experience.tsx
 import { useEffect, useRef } from "react";
 import BashWindow from "../BashWindow";
-import { Briefcase, Award } from "lucide-react";
 import { useAppDispatch } from "@/store/hooks";
 import {
   closeSenior,
@@ -16,7 +15,7 @@ import {
 
 // Style definitions matching previous components
 const styles = {
-  experienceSection: `min-h-screen relative overflow-hidden flex items-center justify-center py-16 bg-gradient-to-br from-gray-200 to-cyan-200 dark:from-gray-950 dark:to-cyan-950`,
+  experienceSection: `relative overflow-hidden flex items-center justify-center py-16 bg-gradient-to-br from-gray-200 to-cyan-200 dark:from-gray-950 dark:to-cyan-950`,
   floatingBubble1: `absolute top-1/5 left-1/5 w-72 h-72 bg-blue-300/20 dark:bg-blue-600/15 rounded-full blur-3xl`,
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-96 h-96 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-cyan-800`,
@@ -105,7 +104,7 @@ const Experience: React.FC = () => {
                     </span>
                     <span className="text-cyan-400"> $ </span>cat techdome.info
                   </span>
-                  {!isMinimized ? (
+                  {isMinimized ? (
                     <>[...]</>
                   ) : (
                     <div className="flex flex-col gap-4">
@@ -151,7 +150,7 @@ const Experience: React.FC = () => {
                           ].map((stack, i) => (
                             <span
                               key={i}
-                              className="px-1 py-0.5 bg-gray-50/20 text-xs"
+                              className="px-1 py-0.5 dark:bg-gray-50/20 bg-gray-400/20 text-xs"
                             >
                               {stack}
                             </span>
@@ -208,7 +207,7 @@ const Experience: React.FC = () => {
                           <span>Status: </span>
 
                           <div className="flex flex-wrap gap-2">
-                            <span className="px-1 py-0.5 bg-gray-50/20 text-xs">
+                            <span className="px-1 py-0.5 dark:bg-gray-50/20 bg-gray-400/20 text-xs">
                               GRADUATE
                             </span>
                           </div>
@@ -242,7 +241,7 @@ const Experience: React.FC = () => {
                           <span>Status: </span>
 
                           <div className="flex flex-wrap gap-2">
-                            <span className="px-1 py-0.5 bg-gray-50/20 text-xs">
+                            <span className="px-1 py-0.5 dark:bg-gray-50/20 bg-gray-400/20 text-xs">
                               Passed with 74% Score
                             </span>
                           </div>

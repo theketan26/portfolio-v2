@@ -6,13 +6,12 @@ import {
   closeTerminal,
   toggleTerminalMinimized,
   toggleTerminalHidden,
-  openTerminal,
 } from "@/store/slices/terminalSlice";
 import BashWindow from "../BashWindow";
 
 // Updated style definitions with spacing adjustments
 const styles = {
-  skillsSection: `relative overflow-hidden py-24 bg-gradient-to-br from-blue-50 to-gray-100 dark:from-blue-950 dark:to-gray-900`,
+  skillsSection: `relative overflow-hidden py-24 bg-gradient-to-br from-blue-50 to-gray-100 dark:from-blue-950 dark:to-gray-900 items-center`,
   floatingBubble1: `absolute top-1/5 left-1/5 w-64 h-64 bg-blue-300/20 dark:bg-blue-600/15 rounded-full blur-3xl`,
   floatingBubble2: `absolute bottom-1/5 right-1/5 w-80 h-80 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-blue-800`,
@@ -31,15 +30,6 @@ interface SkillCategories {
 
 const Skills: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isOpen: isTerminalOpen, isHidden: isTerminalHidden } = useAppSelector(
-    (state) => state.terminal,
-  );
-  const [activeCategory, setActiveCategory] = useState<string>("technical");
-  const [displayedLines, setDisplayedLines] = useState<SkillCategories>({
-    technical: [],
-    soft: [],
-    tools: [],
-  });
   const parallaxRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -182,7 +172,7 @@ const Skills: React.FC = () => {
                       <div key={category} className={`flex h-full flex-col`}>
                         <div className="flex gap-2">
                           <span className="text-cyan-400">$</span>
-                          <span className="text-white">
+                          <span className="dark:text-white text-gray-800">
                             {(
                               category.charAt(0).toUpperCase() +
                               category.slice(1)
@@ -194,7 +184,10 @@ const Skills: React.FC = () => {
                         ) : (
                           <div className="flex-wrap gap-3 flex mt-5 mb-8">
                             {skillCategories[category].map((skill) => (
-                              <div key={skill} className="p-2 bg-gray-700/50">
+                              <div
+                                key={skill}
+                                className="px-2 py-1 dark:bg-gray-700/50 bg-gray-400/20"
+                              >
                                 {skill}
                               </div>
                             ))}

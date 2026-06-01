@@ -4,7 +4,7 @@ const styles = {
   container: "w-full md:w-1/2 flex justify-center md:justify-end ",
   visualContainer: `relative w-full h-72 md:h-96 lg:h-[28rem] flex items-center justify-center `,
   codeContainer: `min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-gray-200/50 dark:bg-gray-700/50 rounded-lg shadow-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700 `,
-  codeHeader: `flex items-center p-6`,
+  codeHeader: `flex items-center p-6 w-full`,
   codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
   codeBlock: `bg-gray-300/50 dark:bg-gray-900/50  p-6 font-mono text-sm text-gray-800 dark:text-gray-300`,
   codeLine: `block mb-2`,
@@ -25,6 +25,10 @@ interface BashWindowProps {
   isOpenProp?: boolean;
   isMinimizedProp?: boolean;
   isHiddenProp?: boolean;
+  actions?: {
+    label: string;
+    href: string;
+  }[];
 }
 
 export default function BashWindow({
@@ -41,6 +45,7 @@ export default function BashWindow({
   visualContainerClass,
   codeContainerClass,
   codeBlockClass,
+  actions = [],
 }: BashWindowProps) {
   const { isOpen, isMinimized, isHidden } = useAppSelector(
     (state) => state[selector],
@@ -53,19 +58,38 @@ export default function BashWindow({
           <div className={styles.codeHeader}>
             <button
               className={`${styles.codeDot} bg-red-500`}
-              onClick={onClose}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
             ></button>
             <button
               className={`${styles.codeDot} bg-yellow-500`}
-              onClick={onMinimized}
+              onClick={(e) => {
+                e.stopPropagation();
+                onMinimized();
+              }}
             ></button>
             <span
               className={`${styles.codeDot} bg-green-500`}
-              onClick={onHidden}
+              onClick={(e) => {
+                e.stopPropagation();
+                onHidden();
+              }}
             ></span>
             <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
               {title}
             </span>
+
+            <div className="ml-auto flex gap-5">
+              {actions
+                .filter((action) => action.href)
+                .map((action) => (
+                  <a href={action.href} target="_blank" className="underline">
+                    {action.label}
+                  </a>
+                ))}
+            </div>
           </div>
 
           {!(isHidden || isHiddenProp) && (

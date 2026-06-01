@@ -1,6 +1,6 @@
 // components/Projects.tsx
-import { useEffect, useRef } from "react";
-import { Code } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Code } from "lucide-react";
 import CustomFollower from "../common/CursorFollower";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -9,10 +9,11 @@ import {
   toggleProjectHidden,
 } from "@/store/slices/projectsOpenSlice";
 import BashWindow from "../BashWindow";
+import Image from "next/image";
 
 // Style definitions matching previous components
 const styles = {
-  projectsSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-blue-50 to-gray-100 dark:from-blue-950 dark:to-gray-900`,
+  projectsSection: `min-h-screen relative flex items-center py-16 bg-gradient-to-br from-blue-50 to-gray-100 dark:from-blue-950 dark:to-gray-900`,
   floatingBubble1: `absolute top-1/5 left-1/4 w-64 h-64 bg-blue-300/20 dark:bg-blue-600/15 rounded-full blur-3xl`,
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-80 h-80 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-cyan-800`,
@@ -33,11 +34,23 @@ const projects = [
     ],
     techStack: ["Python", "Pandas"],
     githubLink: "https://github.com/theketan26/cricket-data-analysis",
+    img: "/cda.png",
+    tags: [
+      {
+        label: "Github",
+        link: "https://github.com/theketan26/cricket-data-analysis",
+        color: "bg-gray-500/50",
+      },
+      {
+        label: "College Minor",
+        color: "bg-orange-500/50",
+      },
+    ],
   },
   {
     fileName: "pmfbyFormFeeder.js",
     constName: "pmbfyFormFeeder",
-    name: "PM Form Feeder",
+    name: "PMFBY Form Feeder",
     description:
       "Automatic form feeder from extracting data from excel.(Client project)",
     features: [
@@ -47,14 +60,20 @@ const projects = [
       "Multiple processes and instances at once, for efficiency.",
     ],
     techStack: ["Python", "Selenium", "Tkinter"],
-    githubLink: "private",
+    tags: [
+      {
+        label: "Client Project",
+        link: "https://github.com/theketan26/cricket-data-analysis",
+        color: "bg-cyan-500/50",
+      },
+    ],
   },
   {
-    fileName: "bikecare.js",
-    constName: "bikecare",
-    name: "BikeCare",
+    fileName: "gearlog.js",
+    constName: "gearlog",
+    name: "GearLog",
     description:
-      "Easy to use bike maintenance and service management software.",
+      "Easy to use bike maintenance and service management software. In progress.",
     features: [
       "Track and manage bike maintenance schedules.",
       "Manage service records and history.",
@@ -62,15 +81,26 @@ const projects = [
       "Supports multiple bikes and users.",
     ],
     techStack: ["Typescript", "NextJS", "TailwindCSS", "PostgreSQL"],
-    githubLink: "private",
-    link: "https://bikecare.vercel.app/",
+    link: "https://gearlog.in/",
+    img: "/gearlog.png",
+    tags: [
+      {
+        label: "Live",
+        link: "https://www.gearlog.in/",
+        color: "bg-green-500/50",
+      },
+      {
+        label: "In Progress",
+        color: "bg-red-500/50",
+      },
+    ],
   },
   {
-    fileName: "romanticApps.tsx",
-    constName: "romanticApps",
+    fileName: "yourStoryApps.tsx",
+    constName: "yourStoryApps",
     name: "Your Story Apps",
     description:
-      "Full-stack web application for creating and sharing personalized romantic experiences using customizable HTML templates.",
+      "Full-stack web application for creating and sharing personalized experiences using customizable templates.",
     features: [
       "Dynamic HTML template engine with live preview.",
       "Secure authentication and passkey-protected sharing.",
@@ -88,11 +118,25 @@ const projects = [
     ],
     githubLink: "https://github.com/theketan26/v-day",
     link: "https://yourstoryapps.vercel.app",
+    img: "/ysa.png",
+    tags: [
+      {
+        label: "Github",
+        link: "https://github.com/theketan26/your-story-apps",
+        color: "bg-gray-500/50",
+      },
+      {
+        label: "Live",
+        link: "https://yourstoryapps.vercel.app/",
+        color: "bg-green-500/50",
+      },
+    ],
   },
 ];
 
 const Projects: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const [openedFeatures, setOpenedFeatures] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   const { openedProjects, minimizedProjects, hiddenProjects } = useAppSelector(
     (state) => state.projectsOpen,
@@ -153,7 +197,7 @@ const Projects: React.FC = () => {
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4"></div>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-12">
+        <div className="mx-auto grid grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <BashWindow
               onClose={() => dispatch(toggleProjectOpen(project.constName))}
@@ -162,85 +206,146 @@ const Projects: React.FC = () => {
                 dispatch(toggleProjectMinimized(project.constName))
               }
               selector="projectsOpen"
-              title={project.constName}
-              containerClass={
-                (index % 2 ? " rotate-3" : " -rotate-3") + " md:w-full"
-              }
+              title={project.fileName}
               key={index}
               isOpenProp={!openedProjects.includes(project.constName)}
               isHiddenProp={hiddenProjects.includes(project.constName)}
               isMinimizedProp={minimizedProjects.includes(project.constName)}
+              containerClass="md:w-full md:justify-center h-auto"
+              codeContainerClass="h-auto max-w-full"
+              codeBlockClass="h-auto relative"
+              visualContainerClass="h-full md:h-full lg:h-full"
+              actions={[
+                {
+                  label: "Go to App",
+                  href: project.link,
+                },
+                {
+                  label: "Go to Github",
+                  href: project.githubLink,
+                },
+              ]}
             >
               {(isMinimized, codeStyle) => (
                 <>
-                  <span className={codeStyle.codeLine}>
-                    <Code
-                      size={16}
-                      className="inline mr-2 text-blue-600 dark:text-cyan-500"
-                    />
-                    <span className={codeStyle.codeHighlight}>const</span>{" "}
-                    {project.constName} = {`{`}
-                    {isMinimized && "...};"}
-                  </span>
-                  {!isMinimized && (
-                    <>
-                      <span className={`${codeStyle.codeLine} pl-8`}>
-                        name:{" "}
-                        <span className={codeStyle.codeHighlight}>
-                          &apos;{project.name}&apos;
-                        </span>
-                        ,
-                      </span>
-                      <span className={`${codeStyle.codeLine} pl-8`}>
-                        description:{" "}
-                        <span className={codeStyle.codeHighlight}>
-                          &apos;{project.description}&apos;
-                        </span>
-                        ,
-                      </span>
-                      <span className={`${codeStyle.codeLine} pl-8`}>
-                        features: [
-                      </span>
-                      {project.features.map((feature, index) => (
-                        <span
-                          key={index}
-                          className={`${codeStyle.codeLine} pl-12`}
-                        >
-                          <span className={codeStyle.codeHighlight}>
-                            &apos;{feature}&apos;
+                  <div
+                    className={`flex flex-col gap-4 ${!isMinimized && "mt-40"}`}
+                  >
+                    <div>
+                      <div className="text-xl font-bold">{project.name}</div>
+                    </div>
+
+                    {isMinimized ? (
+                      <>[...]</>
+                    ) : (
+                      <>
+                        <div className="flex flex-col gap-y-2">
+                          {project.description}
+                        </div>
+
+                        <div className="flex flex-col gap-y-2">
+                          <span>TECH STACK</span>
+
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.map((stack, i) => (
+                              <span
+                                key={i}
+                                className="px-1 py-0.5 bg-gray-50/20 text-xs"
+                              >
+                                {stack}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className={"flex flex-col relative"}>
+                          <button
+                            onClick={() =>
+                              openedFeatures.includes(project.constName)
+                                ? setOpenedFeatures((prev) =>
+                                    prev.filter(
+                                      (predicate) =>
+                                        predicate !== project.constName,
+                                    ),
+                                  )
+                                : setOpenedFeatures((prev) => [
+                                    ...prev,
+                                    project.constName,
+                                  ])
+                            }
+                            className="cursor-pointer absolute top-0.5 -left-5.5"
+                          >
+                            <ChevronDown
+                              className={`h-4 ${
+                                openedFeatures.includes(project.constName)
+                                  ? "rotate-180"
+                                  : ""
+                              }`}
+                            />
+                          </button>
+                          <span className={`${codeStyle.codeLine}`}>
+                            features:{" "}
+                            {!openedFeatures.includes(project.constName) ? (
+                              <button
+                                onClick={() => {
+                                  setOpenedFeatures((prev) => [
+                                    ...prev,
+                                    project.constName,
+                                  ]);
+                                }}
+                                className="cursor-pointer"
+                              >
+                                {"[...]"}
+                              </button>
+                            ) : (
+                              "["
+                            )}
                           </span>
-                          ,
-                        </span>
-                      ))}
-                      <span className={`${codeStyle.codeLine} pl-8`}>],</span>
-                      <span className={`${codeStyle.codeLine} pl-8`}>
-                        techStack: [
-                        {project.techStack.map((tech) => (
-                          <span key={tech} className={`${codeStyle.techTag}`}>
-                            {tech}
-                          </span>
-                        ))}
-                        ]
-                      </span>
-                      <span className={`${codeStyle.codeLine} pl-8`}>
-                        githubLink:{" "}
-                        {project.githubLink === "private" ? (
-                          project.githubLink
-                        ) : (
-                          <a href={project.githubLink}>{project.githubLink}</a>
-                        )}
-                      </span>
-                      {project.link && (
-                        <span className={`${codeStyle.codeLine} pl-8`}>
-                          link:{" "}
-                          {project.link === "private" ? (
-                            project.link
-                          ) : (
-                            <a href={project.link}>{project.link}</a>
+                          {openedFeatures.includes(project.constName) && (
+                            <>
+                              {project.features.map((feature, index) => (
+                                <span
+                                  key={index}
+                                  className={`${codeStyle.codeLine} pl-4`}
+                                >
+                                  <span className={codeStyle.codeHighlight}>
+                                    &apos;{feature}&apos;
+                                  </span>
+                                  ,
+                                </span>
+                              ))}
+                              <span className={`${codeStyle.codeLine}`}>
+                                ],
+                              </span>
+                            </>
                           )}
-                        </span>
-                      )}
-                      <span className={codeStyle.codeLine}>{`}`}</span>
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  {isMinimized ? (
+                    <></>
+                  ) : (
+                    <>
+                      <img
+                        src={project.img}
+                        alt={project.constName}
+                        className="absolute top-0 left-0 -z-1 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,0)_75%)]"
+                      />
+
+                      <div className="absolute top-3 right-3 flex gap-2">
+                        {project.tags.map((tag) => (
+                          <a
+                            key={tag.label}
+                            className={`rounded-full px-2.5 py-1 ${tag.color} text-xs`}
+                            href={tag.link}
+                            target="_blank"
+                          >
+                            {tag.label}
+                          </a>
+                        ))}
+                      </div>
                     </>
                   )}
                 </>

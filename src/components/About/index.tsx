@@ -1,19 +1,17 @@
 // components/About.tsx
 import { useEffect, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import {
   closeCodeWizard,
   toggleCodeWizardMinimized,
   toggleCodeWizardHidden,
 } from "@/store/slices/codeWizardSlice";
-import { Download } from "lucide-react";
-import AnimatedButton from "../AnimatedButton";
 import ResumeButton from "../ResumeButton";
 import { calculateAge } from "@/utils/dateUtils";
 import BashWindow from "../BashWindow";
 
 const styles = {
-  aboutSection: `min-h-screen relative overflow-hidden flex items-center py-16 bg-gradient-to-br from-gray-100 to-indigo-200 dark:from-gray-950 dark:to-indigo-950`,
+  aboutSection: `relative overflow-hidden flex items-center pt-16 pb-32 bg-gradient-to-br from-gray-100 to-indigo-200 dark:from-gray-950 dark:to-indigo-950`,
   floatingBubble1: `absolute top-1/5 left-1/5 w-72 h-72 bg-indigo-300/20 dark:bg-indigo-600/15 rounded-full blur-3xl`,
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-96 h-96 bg-purple-300/20 dark:bg-purple-600/15 rounded-full blur-3xl opacity-80`,
   floatingBubble3: `absolute top-1/3 right-1/4 w-64 h-64 bg-blue-300/20 dark:bg-blue-600/15 rounded-full blur-3xl`,

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { X } from 'lucide-react';
-import { Toast, toast as hotToast } from 'react-hot-toast';
+import { X } from "lucide-react";
+import { Toast, toast as hotToast } from "react-hot-toast";
 
 interface CustomToastProps {
   t: Toast;
@@ -12,7 +12,7 @@ const CustomToast = ({ t, message }: CustomToastProps) => {
   return (
     <div
       className={`${
-        t.visible ? 'animate-enter' : 'animate-leave'
+        t.visible ? "animate-enter" : "animate-leave"
       } max-w-md w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10`}
     >
       <div className="flex-1 w-0 p-4">
@@ -44,7 +44,7 @@ const CustomToast = ({ t, message }: CustomToastProps) => {
       <div className="flex border-l border-gray-200 dark:border-gray-700">
         <button
           onClick={() => hotToast.dismiss(t.id)}
-          className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors cursor-pointer"
         >
           <X className="h-5 w-5" />
         </button>
@@ -58,12 +58,9 @@ export default CustomToast;
 // Helper function to show custom toast with delay
 export const showCustomToast = (message: string, delayMs: number = 2000) => {
   setTimeout(() => {
-    hotToast.custom(
-      (t) => <CustomToast t={t} message={message} />,
-      {
-        duration: Infinity, // Won't auto-dismiss
-        position: 'bottom-right',
-      }
-    );
+    hotToast.custom((t) => <CustomToast t={t} message={message} />, {
+      duration: Infinity, // Won't auto-dismiss
+      position: "bottom-right",
+    });
   }, delayMs);
 };
