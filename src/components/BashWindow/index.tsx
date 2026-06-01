@@ -1,4 +1,15 @@
 import { useAppSelector } from "@/store/hooks";
+import { RootState } from "@/store/store";
+
+interface WindowState {
+  isOpen: boolean;
+  isMinimized: boolean;
+  isHidden: boolean;
+}
+
+type WindowSelector = {
+  [K in keyof RootState]: RootState[K] extends WindowState ? K : never;
+}[keyof RootState];
 
 const styles = {
   container: "w-full md:w-1/2 flex justify-center md:justify-end ",
@@ -13,7 +24,7 @@ const styles = {
 
 interface BashWindowProps {
   title: string;
-  selector: string;
+  selector?: WindowSelector;
   onClose: () => void;
   onMinimized: () => void;
   onHidden: () => void;
@@ -27,7 +38,7 @@ interface BashWindowProps {
   isHiddenProp?: boolean;
   actions?: {
     label: string;
-    href: string;
+    href?: string;
   }[];
 }
 
@@ -47,9 +58,12 @@ export default function BashWindow({
   codeBlockClass,
   actions = [],
 }: BashWindowProps) {
-  const { isOpen, isMinimized, isHidden } = useAppSelector(
-    (state) => state[selector],
+  const windowState = useAppSelector(
+    (state) => (selector != null ? (state[selector] as WindowState) : null),
   );
+  const isOpen = windowState?.isOpen ?? false;
+  const isMinimized = windowState?.isMinimized ?? false;
+  const isHidden = windowState?.isHidden ?? false;
 
   return isOpen || isOpenProp ? (
     <div className={styles.container + containerClass}>
@@ -85,7 +99,7 @@ export default function BashWindow({
               {actions
                 .filter((action) => action.href)
                 .map((action) => (
-                  <a href={action.href} target="_blank" className="underline">
+                  <a href={action.href} target="_blank" className="te">
                     {action.label}
                   </a>
                 ))}
@@ -94,7 +108,7 @@ export default function BashWindow({
 
           {!(isHidden || isHiddenProp) && (
             <div className={styles.codeBlock + " " + codeBlockClass}>
-              {children(isMinimized || isMinimizedProp, styles)}
+              {children(isMinimized || !!isMinimizedProp, styles)}
             </div>
           )}
         </div>

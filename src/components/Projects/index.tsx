@@ -231,7 +231,6 @@ const Projects: React.FC = () => {
               onMinimized={() =>
                 dispatch(toggleProjectMinimized(project.constName))
               }
-              selector="projectsOpen"
               title={project.fileName}
               key={index}
               isOpenProp={!openedProjects.includes(project.constName)}

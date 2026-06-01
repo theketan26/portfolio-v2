@@ -2,6 +2,12 @@
 
 import { ReactLenis } from "@studio-freight/react-lenis";
 
+const Lenis = ReactLenis as unknown as React.ComponentType<{
+  root?: boolean;
+  options?: object;
+  children?: React.ReactNode;
+}>;
+
 function SmoothScrolling({ children }: { children: React.ReactNode }) {
   const lenisOptions = {
     lerp: 0.1,
@@ -11,9 +17,9 @@ function SmoothScrolling({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ReactLenis root options={lenisOptions}>
+    <Lenis root options={lenisOptions}>
       {children}
-    </ReactLenis>
+    </Lenis>
   );
 }
 
