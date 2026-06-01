@@ -1,13 +1,13 @@
 import { useAppSelector } from "@/store/hooks";
 
 const styles = {
-  // Visual element container with adjusted height
-  visualContainer: `relative w-full h-72 md:h-96 lg:h-[28rem] flex items-center justify-center`, // Increased heights for more space
-  codeContainer: `min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-gray-200/50 dark:bg-gray-700/50 rounded-lg shadow-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700`, // Increased max-w-md to max-w-lg, p-6 to p-8
-  codeHeader: `flex items-center p-6`, // Increased mb-4 to mb-6
+  container: "w-full md:w-1/2 flex justify-center md:justify-end ",
+  visualContainer: `relative w-full h-72 md:h-96 lg:h-[28rem] flex items-center justify-center `,
+  codeContainer: `min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-gray-200/50 dark:bg-gray-700/50 rounded-lg shadow-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700 `,
+  codeHeader: `flex items-center p-6`,
   codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
   codeBlock: `bg-gray-300/50 dark:bg-gray-900/50  p-6 font-mono text-sm text-gray-800 dark:text-gray-300`,
-  codeLine: `block mb-2`, // Increased mb-1 to mb-2
+  codeLine: `block mb-2`,
   codeHighlight: `text-blue-600 dark:text-blue-400`,
 };
 
@@ -19,6 +19,9 @@ interface BashWindowProps {
   onHidden: () => void;
   children: (isMinimized: boolean, styles: any) => React.ReactNode;
   containerClass?: string;
+  visualContainerClass?: string;
+  codeContainerClass?: string;
+  codeBlockClass?: string;
   isOpenProp?: boolean;
   isMinimizedProp?: boolean;
   isHiddenProp?: boolean;
@@ -35,19 +38,18 @@ export default function BashWindow({
   isOpenProp,
   isMinimizedProp,
   isHiddenProp,
+  visualContainerClass,
+  codeContainerClass,
+  codeBlockClass,
 }: BashWindowProps) {
   const { isOpen, isMinimized, isHidden } = useAppSelector(
     (state) => state[selector],
   );
 
   return isOpen || isOpenProp ? (
-    <div
-      className={
-        "w-full md:w-1/2 flex justify-center md:justify-end " + containerClass
-      }
-    >
-      <div className={styles.visualContainer}>
-        <div className={styles.codeContainer}>
+    <div className={styles.container + containerClass}>
+      <div className={styles.visualContainer + " " + visualContainerClass}>
+        <div className={styles.codeContainer + " " + codeContainerClass}>
           <div className={styles.codeHeader}>
             <button
               className={`${styles.codeDot} bg-red-500`}
@@ -67,7 +69,7 @@ export default function BashWindow({
           </div>
 
           {(!isHidden || !isHiddenProp) && (
-            <div className={styles.codeBlock}>
+            <div className={styles.codeBlock + " " + codeBlockClass}>
               {children(isMinimized || isMinimizedProp, styles)}
             </div>
           )}

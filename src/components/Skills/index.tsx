@@ -1,8 +1,13 @@
 // components/Skills.tsx
 import { useState, useEffect, useRef } from "react";
 import CustomFollower from "../common/CursorFollower";
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { closeTerminal, toggleTerminalMinimized, toggleTerminalHidden, openTerminal } from '@/store/slices/terminalSlice';
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  closeTerminal,
+  toggleTerminalMinimized,
+  toggleTerminalHidden,
+  openTerminal,
+} from "@/store/slices/terminalSlice";
 import BashWindow from "../BashWindow";
 
 // Updated style definitions with spacing adjustments
@@ -27,7 +32,7 @@ interface SkillCategories {
 const Skills: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isOpen: isTerminalOpen, isHidden: isTerminalHidden } = useAppSelector(
-    (state) => state.terminal
+    (state) => state.terminal,
   );
   const [activeCategory, setActiveCategory] = useState<string>("technical");
   const [displayedLines, setDisplayedLines] = useState<SkillCategories>({
@@ -39,28 +44,34 @@ const Skills: React.FC = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
 
   const skillCategories: SkillCategories = {
-    technical: [
-      "Python - Backend & scripting powerhouse",
-      "JavaScript - Dynamic web development",
-      "React.js - Interactive UI components",
-      "Node.js - Server-side JavaScript",
-      "Django - Rapid Python web framework",
-      "SQL - Database management",
+    language: ["TypeScript", "JavaScript", "Python", "Java", "SQL"],
+    Frontend: [
+      "React JS",
+      "Next JS",
+      "Svelte JS",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Redux",
+      "Zod",
     ],
-    soft: [
-      "Problem Solving - Tackling complex challenges",
-      "Communication - Clear & concise articulation",
-      "Teamwork - Collaborative success",
-      "Time Management - Efficient task handling",
-      "Adaptability - Thriving in change",
-      "Leadership - Guiding teams forward",
+    Backend: [
+      "Node JS",
+      "Express JS",
+      "TSOA",
+      "PostgreSQL",
+      "MongoDB",
+      "Prisma ORM",
+      "Django",
     ],
-    tools: [
-      "VS Code - Code editing perfection",
-      "Git - Version control mastery",
-      "GitHub - Code collaboration hub",
-      "AWS - Cloud infrastructure",
-      "Linux - System administration",
+    "Cloud_&_Tools": [
+      "AWS (Lambda, S3, SES)",
+      "Azure (Blob)",
+      "Firebase",
+      "Git",
+      "Github",
+      "Linux",
+      "Figma",
+      "Docker",
     ],
   };
 
@@ -78,30 +89,30 @@ const Skills: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Typing animation for skills
-    if (!isTerminalOpen || isTerminalHidden) return;
+  // useEffect(() => {
+  //   // Typing animation for skills
+  //   if (!isTerminalOpen || isTerminalHidden) return;
 
-    setDisplayedLines({ technical: [], soft: [], tools: [] });
-    let lineIndex = 0;
-    const typeSkills = () => {
-      if (lineIndex < skillCategories[activeCategory].length) {
-        setDisplayedLines((prev: SkillCategories) => ({
-          ...prev,
-          [activeCategory]: [
-            ...prev[activeCategory],
-            skillCategories[activeCategory][lineIndex - 1],
-          ],
-        }));
-        lineIndex++;
-        setTimeout(typeSkills, 200);
-      }
-    };
-    typeSkills();
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [activeCategory, isTerminalOpen, isTerminalHidden]);
+  //   setDisplayedLines({ technical: [], soft: [], tools: [] });
+  //   let lineIndex = 0;
+  //   const typeSkills = () => {
+  //     if (lineIndex < skillCategories[activeCategory].length) {
+  //       setDisplayedLines((prev: SkillCategories) => ({
+  //         ...prev,
+  //         [activeCategory]: [
+  //           ...prev[activeCategory],
+  //           skillCategories[activeCategory][lineIndex - 1],
+  //         ],
+  //       }));
+  //       lineIndex++;
+  //       setTimeout(typeSkills, 200);
+  //     }
+  //   };
+  //   typeSkills();
+  //   if (terminalRef.current) {
+  //     terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+  //   }
+  // }, [activeCategory, isTerminalOpen, isTerminalHidden]);
 
   return (
     <section id="skills" className={styles.skillsSection}>
@@ -151,25 +162,6 @@ const Skills: React.FC = () => {
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-6"></div>
         </div>
 
-        <div className="flex justify-center mb-12">
-          <div className="flex bg-white/90 dark:bg-gray-800/90 rounded-lg p-3 shadow-md backdrop-blur-sm border border-gray-200 dark:border-gray-700 gap-4">
-            {Object.keys(skillCategories).map((category) => (
-              <button
-                key={category}
-                onClick={() => {
-                  setActiveCategory(category);
-                  dispatch(openTerminal());
-                }}
-                className={`${styles.categoryButton} ${
-                  activeCategory === category ? styles.activeCategoryButton : ""
-                }`}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-
         <div className="flex justify-center">
           <BashWindow
             selector="terminal"
@@ -177,30 +169,60 @@ const Skills: React.FC = () => {
             onClose={() => dispatch(closeTerminal())}
             onMinimized={() => dispatch(toggleTerminalMinimized())}
             onHidden={() => dispatch(toggleTerminalHidden())}
-            containerClass="md:w-full md:justify-center"
+            containerClass="md:w-full md:justify-center h-full"
+            codeContainerClass="h-full max-w-full !min-w-full md:w-full"
+            codeBlockClass="h-full"
+            visualContainerClass="h-full"
           >
             {(isMinimized) => (
-              <div ref={terminalRef} className={styles.terminalOutput}>
-                {!isMinimized &&
-                  displayedLines[activeCategory].map((line, index) => (
-                    <div key={index} className={styles.commandLine}>
+              <>
+                <div ref={terminalRef}>
+                  <div className="grid md:grid-cols-2 h-full gap-5">
+                    {Object.keys(skillCategories).map((category) => (
+                      <div key={category} className={`flex h-full flex-col`}>
+                        <div className="flex gap-5">
+                          $
+                          <span className="text-white">
+                            {(
+                              category.charAt(0).toUpperCase() +
+                              category.slice(1)
+                            ).replaceAll("_", " ")}
+                          </span>
+                        </div>
+                        <div className="flex-wrap gap-3 flex mt-5 mb-8">
+                          {skillCategories[category].map((skill) => (
+                            <div key={skill} className="p-2 bg-gray-700/50">
+                              {skill}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/*{!isMinimized &&
+                    displayedLines[activeCategory].map((line, index) => (
+                      <div key={index} className={styles.commandLine}>
+                        <span className={styles.prompt}>$</span>
+                        <span className={styles.commandText}>{line}</span>
+                      </div>
+                    ))}
+                  {!isMinimized && (
+                    <div className={styles.commandLine}>
                       <span className={styles.prompt}>$</span>
-                      <span className={styles.commandText}>{line}</span>
+                      <span className="animate-blink text-cyan-400 dark:text-blue-400">
+                        |
+                      </span>
                     </div>
-                  ))}
-                {!isMinimized && (
-                  <div className={styles.commandLine}>
-                    <span className={styles.prompt}>$</span>
-                    <span className="animate-blink text-cyan-400 dark:text-blue-400">|</span>
-                  </div>
-                )}
-                {isMinimized && (
-                  <div className={styles.commandLine}>
-                    <span className={styles.prompt}>$</span>
-                    <span className={styles.commandText}>[Minimized]</span>
-                  </div>
-                )}
-              </div>
+                  )}
+                  {isMinimized && (
+                    <div className={styles.commandLine}>
+                      <span className={styles.prompt}>$</span>
+                      <span className={styles.commandText}>[Minimized]</span>
+                    </div>
+                  )}*/}
+                </div>
+              </>
             )}
           </BashWindow>
         </div>
