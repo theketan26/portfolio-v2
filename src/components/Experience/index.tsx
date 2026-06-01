@@ -1,7 +1,8 @@
 // components/Experience.tsx
 import { useEffect, useRef } from 'react';
+import BashWindow from "../BashWindow";
 import { Briefcase, Award } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch } from '@/store/hooks';
 import { closeSenior, toggleSeniorMinimized, toggleSeniorHidden } from '@/store/slices/seniorOpenSlice';
 import { closeEducation, toggleEducationMinimized, toggleEducationHidden } from '@/store/slices/educationOpenSlice';
 
@@ -12,11 +13,6 @@ const styles = {
   floatingBubble2: `absolute bottom-1/4 right-1/5 w-96 h-96 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-cyan-800`,
   square: `absolute w-16 h-16 rotate-45 border-4 border-cyan-200 dark:border-cyan-800`,
-  codeContainer: `font-(family-name:--font-geist-mono) relative bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-xl p-6 backdrop-blur-sm border border-gray-200 dark:border-gray-700 transform max-w-2xl w-full`,
-  codeContainerExp: `rotate-3`,
-  codeContainerEducation: `-rotate-3`,
-  codeHeader: `flex items-center justify-between mb-4`,
-  codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
   codeBlock: `font-mono text-sm text-gray-800 dark:text-gray-300 leading-relaxed`,
   codeLine: `block mb-1 pl-4 border-l-2 border-blue-400 dark:border-cyan-600`,
   codeHighlight: `text-blue-600 dark:text-cyan-400`,
@@ -26,12 +22,6 @@ const styles = {
 const Experience: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const { isOpen: isSeniorOpen, isMinimized: isSeniorMinimized, isHidden: isSeniorHidden } = useAppSelector(
-    (state) => state.seniorOpen
-  );
-  const { isOpen: isEducationOpen, isMinimized: isEducationMinimized, isHidden: isEducationHidden } = useAppSelector(
-    (state) => state.educationOpen
-  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,153 +58,128 @@ const Experience: React.FC = () => {
 
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Senior Software Engineer */}
-          {isSeniorOpen && (
-            <div className={`${styles.codeContainer} ${styles.codeContainerExp}`}>
-              <div className={styles.codeHeader}>
-                <div className="flex items-center">
-                  <button 
-                    className={`${styles.codeDot} bg-red-500`}
-                    onClick={() => dispatch(closeSenior())}
-                  ></button>
-                  <button 
-                    className={`${styles.codeDot} bg-yellow-500`}
-                    onClick={() => dispatch(toggleSeniorMinimized())}
-                  ></button>
-                  <span 
-                    className={`${styles.codeDot} bg-green-500`}
-                    onClick={() => dispatch(toggleSeniorHidden())}
-                  ></span>
-                </div>
-                <span className="text-xs text-gray-500 dark:text-gray-400">techdomeSolutions.js</span>
+          <BashWindow
+            selector="seniorOpen"
+            title="techdomeSolutions.js"
+            onClose={() => dispatch(closeSenior())}
+            onMinimized={() => dispatch(toggleSeniorMinimized())}
+            onHidden={() => dispatch(toggleSeniorHidden())}
+            containerClass="rotate-3 md:w-full md:justify-center"
+          >
+            {(isMinimized) => (
+              <div className={styles.codeBlock}>
+                <span className={`${styles.codeLine} pl-4`}>
+                  <Briefcase size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
+                  <span className={styles.codeHighlight}>const</span> techdomeSolutions = {`{`}{isMinimized && ('...};')}
+                </span>
+                {!isMinimized && (
+                  <>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      title: <span className={styles.codeHighlight}>&apos;Software Development Engineer&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      company: <span className={styles.codeHighlight}>&apos;Techdome Solutions Pvt. Ltd.&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      duration: <span className={styles.codeHighlight}>&apos;Feb 2024 - Present&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      description: <span className={styles.codeHighlight}>&apos;Full stack development on various projects&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      contributions: [
+                    </span>
+                    <span className={`${styles.codeLine} pl-12`}>
+                      <span className={styles.codeHighlight}>&apos;Helped fellows in things I know better&apos;</span>
+                    </span>
+                    <span className={`${styles.codeLine} pl-12`}>
+                      <span className={styles.codeHighlight}>&apos;Helped to improve and refactor Sparrow in Svelte and Nest JS&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-12`}>
+                      <span className={styles.codeHighlight}>&apos;Enhanced the Bookmarked in React and TSOA, communicating with clients&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-12`}>
+                      <span className={styles.codeHighlight}>&apos;Re-developing Polytox Web Application&apos;</span>,
+                    </span>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      ],
+                    </span>
+                    <span className={`${styles.codeLine} pl-8`}>
+                      techStack: [
+                        <span className={styles.techTag}>React</span>
+                        <span className={styles.techTag}>Svelte</span>
+                        <span className={styles.techTag}>Next</span>
+                        <span className={styles.techTag}>Express</span>
+                        <span className={styles.techTag}>PostgreSQL</span>
+                        <span className={styles.techTag}>Numpy & Pandas</span>
+                      ]
+                    </span>
+                    <span className={`${styles.codeLine} pl-4`}>{`}`}</span>
+                  </>
+                )}
               </div>
-              {!isSeniorHidden && (
-                <div className={styles.codeBlock}>
-                  <span className={`${styles.codeLine} pl-4`}>
-                    <Briefcase size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
-                    <span className={styles.codeHighlight}>const</span> techdomeSolutions = {`{`}{isSeniorMinimized && ('...};')}
-                  </span>
-                  {!isSeniorMinimized && (
-                    <>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        title: <span className={styles.codeHighlight}>&apos;Software Development Engineer&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        company: <span className={styles.codeHighlight}>&apos;Techdome Solutions Pvt. Ltd.&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        duration: <span className={styles.codeHighlight}>&apos;Feb 2024 - Present&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        description: <span className={styles.codeHighlight}>&apos;Full stack development on various projects&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        contributions: [
-                      </span>
-                      <span className={`${styles.codeLine} pl-12`}>
-                        <span className={styles.codeHighlight}>&apos;Helped fellows in things I know better&apos;</span>
-                      </span>
-                      <span className={`${styles.codeLine} pl-12`}>
-                        <span className={styles.codeHighlight}>&apos;Helped to improve and refactor Sparrow in Svelte and Nest JS&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-12`}>
-                        <span className={styles.codeHighlight}>&apos;Enhanced the Bookmarked in React and TSOA, communicating with clients&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-12`}>
-                        <span className={styles.codeHighlight}>&apos;Re-developing Polytox Web Application&apos;</span>,
-                      </span>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        ],
-                      </span>
-                      <span className={`${styles.codeLine} pl-8`}>
-                        techStack: [
-                          <span className={styles.techTag}>React</span>
-                          <span className={styles.techTag}>Svelte</span>
-                          <span className={styles.techTag}>Next</span>
-                          <span className={styles.techTag}>Express</span>
-                          <span className={styles.techTag}>PostgreSQL</span>
-                          <span className={styles.techTag}>Numpy & Pandas</span>
-                        ]
-                      </span>
-                      <span className={`${styles.codeLine} pl-4`}>{`}`}</span>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
+            )}
+          </BashWindow>
 
           {/* Education */}
           <div className="mt-12">
             <h3 className="text-center text-2xl font-bold text-white mb-6">Education</h3>
-            {isEducationOpen && (
-              <div className={`${styles.codeContainer} ${styles.codeContainerEducation}`}>
-                <div className={styles.codeHeader}>
-                  <div className="flex items-center">
-                    <button 
-                      className={`${styles.codeDot} bg-red-500`}
-                      onClick={() => dispatch(closeEducation())}
-                    ></button>
-                    <button 
-                      className={`${styles.codeDot} bg-yellow-500`}
-                      onClick={() => dispatch(toggleEducationMinimized())}
-                    ></button>
-                    <span 
-                      className={`${styles.codeDot} bg-green-500`}
-                      onClick={() => dispatch(toggleEducationHidden())}
-                    ></span>
-                  </div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">education.js</span>
-                </div>
-                {!isEducationHidden && (
+            <BashWindow
+              selector="educationOpen"
+              title="education.js"
+              onClose={() => dispatch(closeEducation())}
+              onMinimized={() => dispatch(toggleEducationMinimized())}
+              onHidden={() => dispatch(toggleEducationHidden())}
+              containerClass="-rotate-3 md:w-full md:justify-center"
+            >
+              {(isMinimized) => (
+                <>
                   <div className={styles.codeBlock}>
                     <span className={styles.codeLine}>
                       <Award size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
                       <span className={styles.codeHighlight}>const</span> collegeEducation = {`{`}
                     </span>
-                    {!isEducationMinimized && (
+                    {!isMinimized && (
                       <>
                         <span className={`${styles.codeLine} pl-8`}>
-                          degree: <span className={`${styles.codeHighlight}`}>&apos;Bachelor of Technology&apos;</span>,
+                          degree: <span className={styles.codeHighlight}>&apos;Bachelor of Technology&apos;</span>,
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
-                          institution: <span className={`${styles.codeHighlight}`}>&apos;Sushila Devi Bansal College of Technology&apos;</span>,
+                          institution: <span className={styles.codeHighlight}>&apos;Sushila Devi Bansal College of Technology&apos;</span>,
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
-                          years: <span className={`${styles.codeHighlight}`}>&apos;2020 - 2024&apos;</span>
+                          years: <span className={styles.codeHighlight}>&apos;2020 - 2024&apos;</span>
                         </span>
                       </>
                     )}
                     <span className={styles.codeLine}>{`}`}</span>
                   </div>
-                )}
-
-                {!isEducationHidden && (
                   <div className={styles.codeBlock}>
                     <span className={styles.codeLine}>
                       <Award size={16} className="inline mr-2 text-blue-600 dark:text-cyan-500" />
                       <span className={styles.codeHighlight}>const</span> schoolEducation = {`{`}
                     </span>
-                    {!isEducationMinimized && (
+                    {!isMinimized && (
                       <>
                         <span className={`${styles.codeLine} pl-8`}>
-                          school: <span className={`${styles.codeHighlight}`}>&apos;Sarafa Vidya Niketan&apos;</span>,
+                          school: <span className={styles.codeHighlight}>&apos;Sarafa Vidya Niketan&apos;</span>,
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
-                          passingYear: <span className={`${styles.codeHighlight}`}>&apos;2020&apos;</span>
+                          passingYear: <span className={styles.codeHighlight}>&apos;2020&apos;</span>
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
-                          board: <span className={`${styles.codeHighlight}`}>&apos;Central Board of Education&apos;</span>
+                          board: <span className={styles.codeHighlight}>&apos;Central Board of Education&apos;</span>
                         </span>
                         <span className={`${styles.codeLine} pl-8`}>
-                          percentageIn10&12th: <span className={`${styles.codeHighlight}`}>&apos;74%&apos;</span>
+                          percentageIn10&12th: <span className={styles.codeHighlight}>&apos;74%&apos;</span>
                         </span>
                       </>
                     )}
                     <span className={styles.codeLine}>{`}`}</span>
                   </div>
-                )}
-              </div>
-            )}
+                </>
+              )}
+            </BashWindow>
           </div>
         </div>
       </div>

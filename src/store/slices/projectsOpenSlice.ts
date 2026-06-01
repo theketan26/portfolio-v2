@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ProjectsOpenState {
   openedProjects: string[];
@@ -13,7 +13,7 @@ const initialState: ProjectsOpenState = {
 };
 
 const projectsOpenSlice = createSlice({
-  name: 'projectsOpen',
+  name: "projectsOpen",
   initialState,
   reducers: {
     setOpenedProjects: (state, action: PayloadAction<string[]>) => {
@@ -28,7 +28,9 @@ const projectsOpenSlice = createSlice({
     toggleProjectOpen: (state, action: PayloadAction<string>) => {
       const projectName = action.payload;
       if (state.openedProjects.includes(projectName)) {
-        state.openedProjects = state.openedProjects.filter(p => p !== projectName);
+        state.openedProjects = state.openedProjects.filter(
+          (p) => p !== projectName,
+        );
       } else {
         state.openedProjects = [...state.openedProjects, projectName];
       }
@@ -36,7 +38,9 @@ const projectsOpenSlice = createSlice({
     toggleProjectMinimized: (state, action: PayloadAction<string>) => {
       const projectName = action.payload;
       if (state.minimizedProjects.includes(projectName)) {
-        state.minimizedProjects = state.minimizedProjects.filter(p => p !== projectName);
+        state.minimizedProjects = state.minimizedProjects.filter(
+          (p) => p !== projectName,
+        );
       } else {
         state.minimizedProjects = [...state.minimizedProjects, projectName];
       }
@@ -44,7 +48,9 @@ const projectsOpenSlice = createSlice({
     toggleProjectHidden: (state, action: PayloadAction<string>) => {
       const projectName = action.payload;
       if (state.hiddenProjects.includes(projectName)) {
-        state.hiddenProjects = state.hiddenProjects.filter(p => p !== projectName);
+        state.hiddenProjects = state.hiddenProjects.filter(
+          (p) => p !== projectName,
+        );
       } else {
         state.hiddenProjects = [...state.hiddenProjects, projectName];
       }

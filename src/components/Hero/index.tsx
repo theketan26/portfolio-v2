@@ -4,8 +4,13 @@ import Link from "next/link";
 import { Kaushan_Script } from "next/font/google";
 import CustomFollower from "../common/CursorFollower";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { closeMyCode, toggleMyCodeMinimized, toggleMyCodeHidden } from "@/store/slices/myCodeSlice";
+import {
+  closeMyCode,
+  toggleMyCodeMinimized,
+  toggleMyCodeHidden,
+} from "@/store/slices/myCodeSlice";
 import SocialButtons from "../SocialButtons";
+import BashWindow from "../BashWindow";
 
 const bitcountSingle = Kaushan_Script({
   weight: "400",
@@ -33,45 +38,27 @@ const styles = {
 
   // Social icon styles with more padding
   socialIcon: `p-4 bg-white dark:bg-gray-800 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500 rounded-full shadow-md hover:shadow-lg transition-all`, // Increased p-3 to p-4
-
-  // Visual element container with adjusted height
-  visualContainer: `relative w-full h-72 md:h-96 lg:h-[28rem] flex items-center justify-center`, // Increased heights for more space
-  codeContainer: `min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-white/50 dark:bg-gray-800/50 rounded-lg shadow-xl p-8 backdrop-blur-sm border border-gray-200 dark:border-gray-700`, // Increased max-w-md to max-w-lg, p-6 to p-8
-  codeHeader: `flex items-center mb-6`, // Increased mb-4 to mb-6
-  codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
-  codeBlock: `font-mono text-sm text-gray-800 dark:text-gray-300`,
-  codeLine: `block mb-2`, // Increased mb-1 to mb-2
-  codeHighlight: `text-blue-600 dark:text-blue-400`,
 };
 
 const Hero: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isOpen: isMyCodeOpen, isMinimized: isMyCodeMinimized, isHidden: isMyCodeHidden } = useAppSelector(
-    (state) => state.myCode
-  );
-  
+
   const socialLinks = [
     {
-      icon: (
-        <Github size={24} />
-      ),
+      icon: <Github size={24} />,
       href: process.env.NEXT_PUBLIC_GITHUB_URL || "#",
-      label: "GitHub"
+      label: "GitHub",
     },
     {
-      icon: (
-        <Linkedin size={24} />
-      ),
+      icon: <Linkedin size={24} />,
       href: process.env.NEXT_PUBLIC_LINKEDIN_URL || "#",
-      label: "LinkedIn"
+      label: "LinkedIn",
     },
     {
-      icon: (
-        <Mail size={24} />
-      ),
+      icon: <Mail size={24} />,
       href: `mailto:${process.env.NEXT_PUBLIC_EMAIL}` || "#",
-      label: "Email"
-    }
+      label: "Email",
+    },
   ];
 
   return (
@@ -121,7 +108,7 @@ const Hero: React.FC = () => {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="flex flex-col xl:flex-row items-center justify-between gap-12">
+        <div className="flex flex-col xl:flex-row items-center justify-between">
           <div className="w-full md:w-1/2 min-w-min mb-16 md:mb-0">
             <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
               <p className="text-blue-600 dark:text-blue-400 font-medium">
@@ -129,7 +116,9 @@ const Hero: React.FC = () => {
               </p>
             </div>
 
-            <h1 className={`md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-800 bg-clip-text text-transparent mb-8 w-max ${bitcountSingle.className}`}>
+            <h1
+              className={`md:w-2xl text-5xl sm:text-6xl lg:text-7xl font-bold bg-linear-to-r from-gray-900 dark:from-white to-blue-800 bg-clip-text text-transparent mb-8 w-max ${bitcountSingle.className}`}
+            >
               Ketan Solanki
             </h1>
 
@@ -186,115 +175,85 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {isMyCodeOpen && (
-            <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-              <div className={styles.visualContainer}>
-                {/* Animated code element */}
-                <div className={styles.codeContainer}>
-                  <div className={styles.codeHeader}>
-                    <button
-                      className={`${styles.codeDot} bg-red-500`}
-                      onClick={() => dispatch(closeMyCode())}
-                    ></button>
-                    <button
-                      className={`${styles.codeDot} bg-yellow-500`}
-                      onClick={() => dispatch(toggleMyCodeMinimized())}
-                    ></button>
-                    <span
-                      className={`${styles.codeDot} bg-green-500`}
-                      onClick={() => dispatch(toggleMyCodeHidden())}
-                    ></span>
-                    <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
-                      myCode.js
+          <BashWindow
+            title="myCode.js"
+            selector="myCode"
+            onClose={() => dispatch(closeMyCode())}
+            onHidden={() => dispatch(toggleMyCodeHidden())}
+            onMinimized={() => dispatch(toggleMyCodeMinimized())}
+          >
+            {(isMinimized, codeStyles) => (
+              <>
+                <span className={`${codeStyles.codeLine}`}>
+                  <span className={codeStyles.codeHighlight}>const</span>{" "}
+                  developer = {`{`}
+                  {isMinimized && "...};"}
+                </span>
+                {!isMinimized && (
+                  <>
+                    <span className={`ms-4 ${codeStyles.codeLine}`}>
+                      name:{" "}
+                      <span className={codeStyles.codeHighlight}>
+                        &apos;Ketan Solanki&apos;
+                      </span>
+                      ,
                     </span>
-                  </div>
-
-                  {!isMyCodeHidden && (
-                    <>
-                      <div className={styles.codeBlock}>
-                        <span className={`${styles.codeLine}`}>
-                          <span className={styles.codeHighlight}>const</span>{" "}
-                          developer = {`{`}
-                          {isMyCodeMinimized && "...};"}
-                        </span>
-                        {!isMyCodeMinimized && (
-                          <>
-                            <span className={`ms-4 ${styles.codeLine}`}>
-                              name:{" "}
-                              <span className={styles.codeHighlight}>
-                                &apos;Ketan Solanki&apos;
-                              </span>
-                              ,
-                            </span>
-                            <span className={`ms-4 ${styles.codeLine}`}>
-                              skills: [
-                              <span className={styles.codeHighlight}>
-                                &apos;Python&apos;
-                              </span>
-                              ,{" "}
-                              <span className={styles.codeHighlight}>
-                                &apos;JavaScript&apos;
-                              </span>
-                              ,{" "}
-                              <span className={styles.codeHighlight}>
-                                &apos;SQL&apos;
-                              </span>
-                              ],
-                            </span>
-                            <span className={`ms-4 ${styles.codeLine}`}>
-                              passion:{" "}
-                              <span className={styles.codeHighlight}>
-                                &apos;building apps&apos;
-                              </span>
-                              ,
-                            </span>
-                            <span className={`ms-4 ${styles.codeLine}`}>
-                              tea:{" "}
-                              <span className={styles.codeHighlight}>true</span>
-                            </span>
-                            <span className={`${styles.codeLine}`}>{`}`};</span>
-                          </>
-                        )}
-                        <span className={`${styles.codeLine} mt-4`}>
-                          <span className={styles.codeHighlight}>
-                            function{" "}
-                          </span>
-                          createAwesomeProject() {`{`}
-                          {isMyCodeMinimized && "...};"}
-                        </span>{" "}
-                        {/* Increased mt-2 to mt-4 */}
-                        {!isMyCodeMinimized && (
-                          <>
-                            <span className={`ms-8 ${styles.codeLine}`}>
-                              <span className={styles.codeHighlight}>
-                                return{" "}
-                              </span>
-                              developer.skills.map(
-                              <span className={styles.codeHighlight}>s</span>{" "}
-                              =&gt; {`{`}
-                            </span>
-                            <span className={`ms-12 ${styles.codeLine}`}>
-                              <span className={styles.codeHighlight}>
-                                return{" "}
-                              </span>
-                              <span>s + &apos; master&apos;</span>;
-                            </span>
-                            <span
-                              className={`ms-8 ${styles.codeLine}`}
-                            >{`}`}</span>
-                            <span className={`ms-4 ${styles.codeLine}`}>
-                              );
-                            </span>
-                            <span className={`${styles.codeLine}`}>{`}`}</span>
-                          </>
-                        )}
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
+                    <span className={`ms-4 ${codeStyles.codeLine}`}>
+                      skills: [
+                      <span className={codeStyles.codeHighlight}>
+                        &apos;Python&apos;
+                      </span>
+                      ,{" "}
+                      <span className={codeStyles.codeHighlight}>
+                        &apos;JavaScript&apos;
+                      </span>
+                      ,{" "}
+                      <span className={codeStyles.codeHighlight}>
+                        &apos;SQL&apos;
+                      </span>
+                      ],
+                    </span>
+                    <span className={`ms-4 ${codeStyles.codeLine}`}>
+                      passion:{" "}
+                      <span className={codeStyles.codeHighlight}>
+                        &apos;building apps&apos;
+                      </span>
+                      ,
+                    </span>
+                    <span className={`ms-4 ${codeStyles.codeLine}`}>
+                      tea:{" "}
+                      <span className={codeStyles.codeHighlight}>true</span>
+                    </span>
+                    <span className={`${codeStyles.codeLine}`}>{`}`};</span>
+                  </>
+                )}
+                <span className={`${codeStyles.codeLine} mt-4`}>
+                  <span className={codeStyles.codeHighlight}>function </span>
+                  createAwesomeProject() {`{`}
+                  {isMinimized && "...};"}
+                </span>{" "}
+                {/* Increased mt-2 to mt-4 */}
+                {!isMinimized && (
+                  <>
+                    <span className={`ms-8 ${codeStyles.codeLine}`}>
+                      <span className={codeStyles.codeHighlight}>return </span>
+                      developer.skills.map(
+                      <span className={codeStyles.codeHighlight}>
+                        s
+                      </span> =&gt; {`{`}
+                    </span>
+                    <span className={`ms-12 ${codeStyles.codeLine}`}>
+                      <span className={codeStyles.codeHighlight}>return </span>
+                      <span>s + &apos; master&apos;</span>;
+                    </span>
+                    <span className={`ms-8 ${codeStyles.codeLine}`}>{`}`}</span>
+                    <span className={`ms-4 ${codeStyles.codeLine}`}>);</span>
+                    <span className={`${codeStyles.codeLine}`}>{`}`}</span>
+                  </>
+                )}
+              </>
+            )}
+          </BashWindow>
         </div>
       </div>
     </section>

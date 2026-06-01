@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Exo_2, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/components/common/ReduxProvider";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Exo_2({
   variable: "--font-geist-sans",
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ketan Solanki | Software Engineer",
   description: "Ketan Solanki - Software Engineer",
-  icons: ["/favicon.ico"]
+  icons: ["/favicon.ico"],
 };
 
 export default function RootLayout({

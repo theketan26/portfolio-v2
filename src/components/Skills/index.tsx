@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import CustomFollower from "../common/CursorFollower";
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeTerminal, toggleTerminalMinimized, toggleTerminalHidden, openTerminal } from '@/store/slices/terminalSlice';
+import BashWindow from "../BashWindow";
 
 // Updated style definitions with spacing adjustments
 const styles = {
@@ -11,9 +12,6 @@ const styles = {
   floatingBubble2: `absolute bottom-1/5 right-1/5 w-80 h-80 bg-cyan-300/20 dark:bg-cyan-600/15 rounded-full blur-3xl opacity-80`,
   triangle: `absolute w-0 h-0 border-l-[20px] border-r-[20px] border-b-[34px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-blue-800`,
   square: `absolute w-16 h-16 rotate-45 border-4 border-cyan-200 dark:border-cyan-800`,
-  terminalContainer: `font-(family-name:--font-geist-mono) relative w-full max-w-2xl bg-gray-800/95 dark:bg-gray-900/95 rounded-lg shadow-2xl p-8 backdrop-blur-sm border border-blue-200 dark:border-blue-700`,
-  terminalHeader: `flex items-center justify-between mb-6`,
-  terminalDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
   terminalOutput: `font-mono text-sm text-blue-200 dark:text-cyan-300 leading-relaxed h-[16rem] overflow-y-auto`,
   commandLine: `flex items-center mb-3`,
   prompt: `text-cyan-400 dark:text-blue-400 mr-3`,
@@ -28,7 +26,7 @@ interface SkillCategories {
 
 const Skills: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isOpen: isTerminalOpen, isMinimized: isTerminalMinimized, isHidden: isTerminalHidden } = useAppSelector(
+  const { isOpen: isTerminalOpen, isHidden: isTerminalHidden } = useAppSelector(
     (state) => state.terminal
   );
   const [activeCategory, setActiveCategory] = useState<string>("technical");
@@ -173,54 +171,38 @@ const Skills: React.FC = () => {
         </div>
 
         <div className="flex justify-center">
-          {isTerminalOpen && (
-            <div className={styles.terminalContainer}>
-              <div className={styles.terminalHeader}>
-                <div className="flex items-center">
-                  <button
-                    className={`${styles.terminalDot} bg-red-500`}
-                    onClick={() => dispatch(closeTerminal())}
-                  ></button>
-                  <button
-                    className={`${styles.terminalDot} bg-yellow-500`}
-                    onClick={() => dispatch(toggleTerminalMinimized())}
-                  ></button>
-                  <span
-                    className={`${styles.terminalDot} bg-green-500`}
-                    onClick={() => dispatch(toggleTerminalHidden())}
-                  ></span>
-                </div>
-                <span className="text-xs text-blue-400 dark:text-cyan-400">
-                  skills@ketan:~$
-                </span>
+          <BashWindow
+            selector="terminal"
+            title="skills@ketan:~$"
+            onClose={() => dispatch(closeTerminal())}
+            onMinimized={() => dispatch(toggleTerminalMinimized())}
+            onHidden={() => dispatch(toggleTerminalHidden())}
+            containerClass="md:w-full md:justify-center"
+          >
+            {(isMinimized) => (
+              <div ref={terminalRef} className={styles.terminalOutput}>
+                {!isMinimized &&
+                  displayedLines[activeCategory].map((line, index) => (
+                    <div key={index} className={styles.commandLine}>
+                      <span className={styles.prompt}>$</span>
+                      <span className={styles.commandText}>{line}</span>
+                    </div>
+                  ))}
+                {!isMinimized && (
+                  <div className={styles.commandLine}>
+                    <span className={styles.prompt}>$</span>
+                    <span className="animate-blink text-cyan-400 dark:text-blue-400">|</span>
+                  </div>
+                )}
+                {isMinimized && (
+                  <div className={styles.commandLine}>
+                    <span className={styles.prompt}>$</span>
+                    <span className={styles.commandText}>[Minimized]</span>
+                  </div>
+                )}
               </div>
-              {!isTerminalHidden && (
-                <div ref={terminalRef} className={styles.terminalOutput}>
-                  {!isTerminalMinimized &&
-                    displayedLines[activeCategory].map((line, index) => (
-                      <div key={index} className={styles.commandLine}>
-                        <span className={styles.prompt}>$</span>
-                        <span className={styles.commandText}>{line}</span>
-                      </div>
-                    ))}
-                  {!isTerminalMinimized && (
-                    <div className={styles.commandLine}>
-                      <span className={styles.prompt}>$</span>
-                      <span className="animate-blink text-cyan-400 dark:text-blue-400">
-                        |
-                      </span>
-                    </div>
-                  )}
-                  {isTerminalMinimized && (
-                    <div className={styles.commandLine}>
-                      <span className={styles.prompt}>$</span>
-                      <span className={styles.commandText}>[Minimized]</span>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
+            )}
+          </BashWindow>
         </div>
       </div>
     </section>

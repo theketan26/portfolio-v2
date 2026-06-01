@@ -1,25 +1,44 @@
-'use client';
+"use client";
 
-import { Code2, Wand2, Terminal, Briefcase, Award, FolderOpen } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { openMyCode } from '@/store/slices/myCodeSlice';
-import { openCodeWizard } from '@/store/slices/codeWizardSlice';
-import { openTerminal } from '@/store/slices/terminalSlice';
-import { openSenior } from '@/store/slices/seniorOpenSlice';
-import { openEducation } from '@/store/slices/educationOpenSlice';
-import { openAllProjects } from '@/store/slices/projectsOpenSlice';
+import {
+  Code2,
+  Wand2,
+  Terminal,
+  Briefcase,
+  Award,
+  FolderOpen,
+} from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { openMyCode } from "@/store/slices/myCodeSlice";
+import { openCodeWizard } from "@/store/slices/codeWizardSlice";
+import { openTerminal } from "@/store/slices/terminalSlice";
+import { openSenior } from "@/store/slices/seniorOpenSlice";
+import { openEducation } from "@/store/slices/educationOpenSlice";
+import { openAllProjects } from "@/store/slices/projectsOpenSlice";
 
 const Taskbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isOpen: isMyCodeOpen } = useAppSelector((state) => state.myCode);
-  const { isOpen: isCodeWizardOpen } = useAppSelector((state) => state.codeWizard);
+  const { isOpen: isCodeWizardOpen } = useAppSelector(
+    (state) => state.codeWizard,
+  );
   const { isOpen: isTerminalOpen } = useAppSelector((state) => state.terminal);
   const { isOpen: isSeniorOpen } = useAppSelector((state) => state.seniorOpen);
-  const { isOpen: isEducationOpen } = useAppSelector((state) => state.educationOpen);
+  const { isOpen: isEducationOpen } = useAppSelector(
+    (state) => state.educationOpen,
+  );
   const { openedProjects } = useAppSelector((state) => state.projectsOpen);
 
   // Only show taskbar when at least one window is closed
-  if (isMyCodeOpen && isCodeWizardOpen && isTerminalOpen && isSeniorOpen && isEducationOpen && openedProjects.length === 0) return null;
+  if (
+    isMyCodeOpen &&
+    isCodeWizardOpen &&
+    isTerminalOpen &&
+    isSeniorOpen &&
+    isEducationOpen &&
+    openedProjects.length === 0
+  )
+    return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-lg transition-all duration-300">
@@ -36,7 +55,7 @@ const Taskbar: React.FC = () => {
               <span className="text-sm font-medium">myCode.js</span>
             </button>
           )}
-          
+
           {/* codeWizard.js window button */}
           {!isCodeWizardOpen && (
             <button
@@ -48,7 +67,7 @@ const Taskbar: React.FC = () => {
               <span className="text-sm font-medium">codeWizard.js</span>
             </button>
           )}
-          
+
           {/* Terminal window button */}
           {!isTerminalOpen && (
             <button
@@ -60,7 +79,7 @@ const Taskbar: React.FC = () => {
               <span className="text-sm font-medium">skills@ketan:~$</span>
             </button>
           )}
-          
+
           {/* Senior Experience window button */}
           {!isSeniorOpen && (
             <button
@@ -72,7 +91,7 @@ const Taskbar: React.FC = () => {
               <span className="text-sm font-medium">techdomeSolutions.js</span>
             </button>
           )}
-          
+
           {/* Education window button */}
           {!isEducationOpen && (
             <button
@@ -84,7 +103,7 @@ const Taskbar: React.FC = () => {
               <span className="text-sm font-medium">education.js</span>
             </button>
           )}
-          
+
           {/* Projects window button */}
           {openedProjects.length > 0 && (
             <button
@@ -93,7 +112,9 @@ const Taskbar: React.FC = () => {
               title="Open All Projects"
             >
               <FolderOpen size={20} />
-              <span className="text-sm font-medium">Projects ({openedProjects.length})</span>
+              <span className="text-sm font-medium">
+                Projects ({openedProjects.length})
+              </span>
             </button>
           )}
         </div>
