@@ -1,11 +1,12 @@
 // components/Navbar.tsx
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { toggleTheme } from '@/store/slices/themeSlice';
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { toggleTheme } from "@/store/slices/themeSlice";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import TorchToggle from '../TorchToggle';
-import ResumeButton from '../ResumeButton';
+import { Menu, X } from "lucide-react";
+import TorchToggle from "../TorchToggle";
+import ResumeButton from "../ResumeButton";
+import { motion } from "motion/react";
 
 interface NavLink {
   name: string;
@@ -20,15 +21,19 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+      if (
+        isOpen &&
+        navRef.current &&
+        !navRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -47,7 +52,15 @@ const Navbar: React.FC = () => {
 
   return (
     <div>
-      <nav
+      <motion.nav
+        initial={{
+          opacity: 0,
+          translateY: -50,
+        }}
+        animate={{
+          opacity: 1,
+          translateY: 0,
+        }}
         ref={navRef}
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 dark:bg-white/10 bg-indigo-900/10 dark: backdrop-blur-md md:rounded-full rounded-3xl mt-5`}
       >
@@ -99,20 +112,17 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
-              
-              <div onClick={() => setIsOpen(false)} className='mt-5'>
+
+              <div onClick={() => setIsOpen(false)} className="mt-5">
                 <ResumeButton />
               </div>
             </div>
           </div>
         )}
-      </nav>
+      </motion.nav>
 
       <div className="fixed top-10 right-10 z-20">
-        <TorchToggle 
-          checked={darkMode} 
-          onChange={toggleDarkMode}
-        />
+        <TorchToggle checked={darkMode} onChange={toggleDarkMode} />
       </div>
     </div>
   );

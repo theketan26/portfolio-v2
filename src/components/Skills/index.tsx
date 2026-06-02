@@ -1,13 +1,13 @@
 // components/Skills.tsx
-import { useState, useEffect, useRef } from "react";
-import CustomFollower from "../common/CursorFollower";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useEffect, useRef } from "react";
+import { useAppDispatch } from "@/store/hooks";
 import {
   closeTerminal,
   toggleTerminalMinimized,
   toggleTerminalHidden,
 } from "@/store/slices/terminalSlice";
 import BashWindow from "../BashWindow";
+import { motion } from "motion/react";
 
 // Updated style definitions with spacing adjustments
 const styles = {
@@ -79,39 +79,8 @@ const Skills: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // useEffect(() => {
-  //   // Typing animation for skills
-  //   if (!isTerminalOpen || isTerminalHidden) return;
-
-  //   setDisplayedLines({ technical: [], soft: [], tools: [] });
-  //   let lineIndex = 0;
-  //   const typeSkills = () => {
-  //     if (lineIndex < skillCategories[activeCategory].length) {
-  //       setDisplayedLines((prev: SkillCategories) => ({
-  //         ...prev,
-  //         [activeCategory]: [
-  //           ...prev[activeCategory],
-  //           skillCategories[activeCategory][lineIndex - 1],
-  //         ],
-  //       }));
-  //       lineIndex++;
-  //       setTimeout(typeSkills, 200);
-  //     }
-  //   };
-  //   typeSkills();
-  //   if (terminalRef.current) {
-  //     terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-  //   }
-  // }, [activeCategory, isTerminalOpen, isTerminalHidden]);
-
   return (
     <section id="skills" className={styles.skillsSection}>
-      <CustomFollower
-        key="skill-section"
-        cursor="/ts-icon.svg"
-        parentElementId="skills"
-      />
-
       {/* Parallax Background */}
       <div
         ref={parallaxRef}
@@ -163,6 +132,15 @@ const Skills: React.FC = () => {
             codeContainerClass="h-auto max-w-full !min-w-full md:w-auto"
             codeBlockClass="h-auto"
             visualContainerClass="h-auto"
+            initialAnimation={{
+              opacity: 0,
+              translateY: 100,
+            }}
+            whileInView={{
+              opacity: 1,
+              translateY: 0,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
           >
             {(isMinimized) => (
               <>

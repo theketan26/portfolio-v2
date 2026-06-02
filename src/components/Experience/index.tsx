@@ -12,6 +12,7 @@ import {
   toggleEducationMinimized,
   toggleEducationHidden,
 } from "@/store/slices/educationOpenSlice";
+import { motion } from "motion/react";
 
 // Style definitions matching previous components
 const styles = {
@@ -84,7 +85,18 @@ const Experience: React.FC = () => {
         </div>
 
         <div className="mx-auto flex gap-32 md:gap-8 xl:flex-row flex-col px-4">
-          <div className="flex flex-col md:gap-8 gap-24">
+          <motion.div
+            initial={{
+              opacity: 0,
+              translateX: -100,
+            }}
+            whileInView={{
+              opacity: 1,
+              translateX: 0,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="flex flex-col md:gap-8 gap-24"
+          >
             <h3 className="xl:text-left text-center text-2xl font-bold text-white">
               Work Experience
             </h3>
@@ -162,10 +174,20 @@ const Experience: React.FC = () => {
                 </>
               )}
             </BashWindow>
-          </div>
+          </motion.div>
 
-          {/* Education */}
-          <div className="flex flex-col md:gap-8 gap-24">
+          <motion.div
+            initial={{
+              opacity: 0,
+              translateX: 100,
+            }}
+            whileInView={{
+              opacity: 1,
+              translateX: 0,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="flex flex-col md:gap-8 gap-24"
+          >
             <h3 className="xl:text-left text-center text-2xl font-bold text-white">
               Education
             </h3>
@@ -254,7 +276,7 @@ const Experience: React.FC = () => {
                 </div>
               )}
             </BashWindow>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -181,8 +181,6 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className={styles.projectsSection}>
-      <CustomFollower parentElementId="projects" cursor="/python-icon.svg" />
-
       {/* Parallax Background */}
       <div
         ref={parallaxRef}
@@ -250,6 +248,15 @@ const Projects: React.FC = () => {
                   href: project.githubLink,
                 },
               ]}
+              initialAnimation={{
+                opacity: 0,
+                translateY: 100,
+              }}
+              whileInView={{
+                opacity: 1,
+                translateY: 0,
+              }}
+              viewport={{ once: true, amount: 0.5 }}
             >
               {(isMinimized, codeStyle) => (
                 <>

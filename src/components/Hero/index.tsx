@@ -11,6 +11,7 @@ import {
 } from "@/store/slices/myCodeSlice";
 import SocialButtons from "../SocialButtons";
 import BashWindow from "../BashWindow";
+import { motion } from "motion/react";
 
 const bitcountSingle = Kaushan_Script({
   weight: "400",
@@ -63,8 +64,6 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className={styles.heroSection}>
-      <CustomFollower cursor="/react-icon.svg" parentElementId="home" />
-
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <div className={styles.floatingBubble1}></div>
@@ -109,7 +108,18 @@ const Hero: React.FC = () => {
       {/* Content */}
       <div className="max-w-7xl mx-auto pb-8 md:pb-0 px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-12">
-          <div className="w-full md:w-1/2 md:mt-0 mb-16 md:mb-0">
+          <motion.div
+            viewport={{ once: true }}
+            initial={{
+              translateX: -100,
+              opacity: 0,
+            }}
+            animate={{
+              translateX: 0,
+              opacity: 1,
+            }}
+            className="w-full md:w-1/2 md:mt-0 mb-16 md:mb-0"
+          >
             <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
               <p className="text-blue-600 dark:text-blue-400 sm:text-md text-xs font-medium">
                 Hello, I&apos;m
@@ -150,30 +160,8 @@ const Hero: React.FC = () => {
 
             <div className="flex space-x-8">
               <SocialButtons buttons={socialLinks} />
-              {/* <a
-                href={process.env.NEXT_PUBLIC_GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialIcon}
-              >
-                <Github size={24} />
-              </a>
-              <a
-                href={process.env.NEXT_PUBLIC_LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialIcon}
-              >
-                <Linkedin size={24} />
-              </a>
-              <a
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-                className={styles.socialIcon}
-              >
-                <Mail size={24} />
-              </a> */}
             </div>
-          </div>
+          </motion.div>
 
           <BashWindow
             title="myCode.js"
@@ -181,9 +169,17 @@ const Hero: React.FC = () => {
             onClose={() => dispatch(closeMyCode())}
             onHidden={() => dispatch(toggleMyCodeHidden())}
             onMinimized={() => dispatch(toggleMyCodeMinimized())}
+            initialAnimation={{
+              opacity: 0,
+              translateX: 200,
+            }}
+            animate={{
+              opacity: 1,
+              translateX: 0,
+            }}
           >
             {(isMinimized, codeStyles) => (
-              <>
+              <div>
                 <span className={`${codeStyles.codeLine}`}>
                   <span className={codeStyles.codeHighlight}>const</span>{" "}
                   developer = {`{`}
@@ -231,7 +227,7 @@ const Hero: React.FC = () => {
                   <span className={codeStyles.codeHighlight}>function </span>
                   createAwesomeProject() {`{`}
                   {isMinimized && "...};"}
-                </span>{" "}
+                </span>
                 {/* Increased mt-2 to mt-4 */}
                 {!isMinimized && (
                   <>
@@ -251,7 +247,7 @@ const Hero: React.FC = () => {
                     <span className={`${codeStyles.codeLine}`}>{`}`}</span>
                   </>
                 )}
-              </>
+              </div>
             )}
           </BashWindow>
         </div>

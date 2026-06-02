@@ -4,6 +4,8 @@ import "./globals.css";
 import ReduxProvider from "@/components/common/ReduxProvider";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
+import CustomFollower from "@/components/common/CursorFollower";
+import getRandomItem from "@/utils/getRandomItem";
 
 const geistSans = Exo_2({
   variable: "--font-geist-sans",
@@ -31,6 +33,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <CustomFollower
+          cursor={getRandomItem([
+            "/python-icon.svg",
+            "/react-icon.svg",
+            "/ts-icon.svg",
+          ])}
+        />
         <Analytics />
         <ReduxProvider>{children}</ReduxProvider>
       </body>

@@ -9,6 +9,7 @@ import {
 import ResumeButton from "../ResumeButton";
 import { calculateAge } from "@/utils/dateUtils";
 import BashWindow from "../BashWindow";
+import { motion } from "motion/react";
 
 const styles = {
   aboutSection: `relative overflow-hidden flex items-center pt-16 pb-32 bg-gradient-to-br from-gray-100 to-indigo-200 dark:from-gray-950 dark:to-indigo-950`,
@@ -94,7 +95,18 @@ const About: React.FC = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 items-center">
-          <div className="w-full md:w-1/2">
+          <motion.div
+            initial={{
+              opacity: 0,
+              translateX: -100,
+            }}
+            whileInView={{
+              opacity: 1,
+              translateX: 0,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="w-full md:w-1/2"
+          >
             <h3 className="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">
               My Story
             </h3>
@@ -115,27 +127,20 @@ const About: React.FC = () => {
             </p>
 
             <ResumeButton withoutIcon />
-            {/* <div className="grid grid-cols-2 gap-6 mb-6">
-              <div className="flex items-center">
-                <Code size={24} className="text-indigo-400 mr-3" />
-                <span className="text-gray-200">Coding Expertise</span>
-              </div>
-              <div className="flex items-center">
-                <Server size={24} className="text-indigo-400 mr-3" />
-                <span className="text-gray-200">Server-Side Development</span>
-              </div>
-              <div className="flex items-center">
-                <Monitor size={24} className="text-indigo-400 mr-3" />
-                <span className="text-gray-200">UI/UX Development</span>
-              </div>
-              <div className="flex items-center">
-                <Cpu size={24} className="text-indigo-400 mr-3" />
-                <span className="text-gray-200">Tech Enthusiast</span>
-              </div>
-            </div> */}
-          </div>
+          </motion.div>
 
-          <div className="w-full md:w-1/2 flex justify-center pt-16 md:pt-0">
+          <motion.div
+            initial={{
+              opacity: 0,
+              translateX: 100,
+            }}
+            whileInView={{
+              opacity: 1,
+              translateX: 0,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="w-full md:w-1/2 flex justify-center pt-16 md:pt-0"
+          >
             <BashWindow
               onClose={() => dispatch(closeCodeWizard())}
               onHidden={() => dispatch(toggleCodeWizardHidden())}
@@ -236,7 +241,7 @@ const About: React.FC = () => {
                 </>
               )}
             </BashWindow>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

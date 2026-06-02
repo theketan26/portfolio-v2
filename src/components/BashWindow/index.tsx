@@ -1,5 +1,12 @@
 import { useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store/store";
+import {
+  motion,
+  TargetAndTransition,
+  VariantLabels,
+  ViewportOptions,
+  AnimatePresence,
+} from "motion/react";
 
 interface WindowState {
   isOpen: boolean;
@@ -17,7 +24,7 @@ const styles = {
   codeContainer: `md:min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-gray-200/50 dark:bg-gray-700/50 rounded-lg shadow-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700 `,
   codeHeader: `flex items-center p-3 md:p-6 w-full`,
   codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
-  codeBlock: `bg-gray-300/50 dark:bg-gray-900/50 p-3 md:p-6 font-mono text-xs md:text-sm text-gray-800 dark:text-gray-300`,
+  codeBlock: `bg-gray-300/50 dark:bg-gray-900/50 p-3 md:p-6 font-mono text-xs md:text-sm text-gray-800 dark:text-gray-300 overflow-hidden`,
   codeLine: `block mb-2`,
   codeHighlight: `text-blue-600 dark:text-blue-400`,
 };
@@ -40,6 +47,10 @@ interface BashWindowProps {
     label: string;
     href?: string;
   }[];
+  initialAnimation?: boolean | TargetAndTransition | VariantLabels;
+  animate?: boolean | TargetAndTransition | VariantLabels;
+  whileInView?: TargetAndTransition | VariantLabels;
+  viewport?: ViewportOptions;
 }
 
 export default function BashWindow({
@@ -57,6 +68,10 @@ export default function BashWindow({
   codeContainerClass,
   codeBlockClass,
   actions = [],
+  initialAnimation = {},
+  animate = {},
+  whileInView = {},
+  viewport = {},
 }: BashWindowProps) {
   const windowState = useAppSelector((state) =>
     selector != null ? (state[selector] as WindowState) : null,
@@ -65,78 +80,98 @@ export default function BashWindow({
   const isMinimized = windowState?.isMinimized ?? false;
   const isHidden = windowState?.isHidden ?? false;
 
-  return isOpen || isOpenProp ? (
-    <div className={styles.container + containerClass}>
-      <div className={styles.visualContainer + " " + visualContainerClass}>
-        <div className={styles.codeContainer + " " + codeContainerClass}>
-          <div className={styles.codeHeader}>
-            <button
-              className={`${styles.codeDot} bg-red-500`}
-              onClick={(e) => {
-                e.stopPropagation();
-                onClose();
-              }}
-            ></button>
-            <button
-              className={`${styles.codeDot} bg-yellow-500`}
-              onClick={(e) => {
-                e.stopPropagation();
-                onMinimized();
-              }}
-            ></button>
-            <span
-              className={`${styles.codeDot} bg-green-500`}
-              onClick={(e) => {
-                e.stopPropagation();
-                onHidden();
-              }}
-            ></span>
-            <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
-              {title}
-            </span>
+  return (
+    <AnimatePresence>
+      {isOpen || isOpenProp ? (
+        <motion.div
+          initial={initialAnimation}
+          animate={animate}
+          whileInView={whileInView}
+          viewport={viewport}
+          exit={{
+            opacity: 0,
+          }}
+          className={styles.container + containerClass}
+        >
+          <div className={styles.visualContainer + " " + visualContainerClass}>
+            <div className={styles.codeContainer + " " + codeContainerClass}>
+              <div className={styles.codeHeader}>
+                <button
+                  className={`${styles.codeDot} bg-red-500`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClose();
+                  }}
+                ></button>
+                <button
+                  className={`${styles.codeDot} bg-yellow-500`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onMinimized();
+                  }}
+                ></button>
+                <span
+                  className={`${styles.codeDot} bg-green-500`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onHidden();
+                  }}
+                ></span>
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
+                  {title}
+                </span>
 
-            <div className="hidden md:flex ml-auto gap-5">
-              {actions
-                .filter((action) => action.href)
-                .map((action, index) => (
-                  <a
-                    key={index}
-                    href={action.href}
-                    target="_blank"
-                    className="te"
+                <div className="hidden md:flex ml-auto gap-5">
+                  {actions
+                    .filter((action) => action.href)
+                    .map((action, index) => (
+                      <a
+                        key={index}
+                        href={action.href}
+                        target="_blank"
+                        className="te"
+                      >
+                        {action.label}
+                      </a>
+                    ))}
+                </div>
+              </div>
+
+              {actions.filter((action) => action.href).length > 0 && (
+                <div className="flex md:hidden gap-5 p-4">
+                  {actions
+                    .filter((action) => action.href)
+                    .map((action, index) => (
+                      <a
+                        key={index}
+                        href={action.href}
+                        target="_blank"
+                        className="te"
+                      >
+                        {action.label}
+                      </a>
+                    ))}
+                </div>
+              )}
+
+              <AnimatePresence>
+                {!(isHidden || isHiddenProp) && (
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: "auto" }}
+                    exit={{ height: 0 }}
+                    className={styles.codeBlock + " " + codeBlockClass}
                   >
-                    {action.label}
-                  </a>
-                ))}
+                    {children(isMinimized || !!isMinimizedProp, styles)}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
-
-          {actions.filter((action) => action.href).length > 0 && (
-            <div className="flex md:hidden gap-5 p-4">
-              {actions
-                .filter((action) => action.href)
-                .map((action, index) => (
-                  <a
-                    key={index}
-                    href={action.href}
-                    target="_blank"
-                    className="te"
-                  >
-                    {action.label}
-                  </a>
-                ))}
-            </div>
-          )}
-
-          {!(isHidden || isHiddenProp) && (
-            <div className={styles.codeBlock + " " + codeBlockClass}>
-              {children(isMinimized || !!isMinimizedProp, styles)}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  ) : (
-    <></>
+        </motion.div>
+      ) : (
+        <></>
+      )}
+    </AnimatePresence>
   );
 }
