@@ -33,8 +33,8 @@ const styles = {
   triangle: `absolute w-0 h-0 border-l-[30px] border-r-[30px] border-b-[52px] border-l-transparent border-r-transparent border-b-blue-200 dark:border-b-blue-800 animate-bounce`,
 
   // Button styles with increased padding and gap
-  primaryButton: `text-nowrap px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full shadow-lg transition-colors flex items-center`, // Increased px-8 py-4 to px-10 py-5
-  secondaryButton: `text-nowrap px-10 py-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500 font-medium rounded-full shadow-md hover:shadow-lg transition-all`, // Increased px-8 py-4 to px-10 py-5
+  primaryButton: `md:text-md text-sm text-nowrap w-max px-4 py-2 md:px-10 md:py-5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full shadow-lg transition-colors flex items-center`,
+  secondaryButton: `md:text-md text-sm text-nowrap md:px-10 px-4 w-max md:py-5 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500 font-medium rounded-full shadow-md hover:shadow-lg transition-all`,
 
   // Social icon styles with more padding
   socialIcon: `p-4 bg-white dark:bg-gray-800 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500 rounded-full shadow-md hover:shadow-lg transition-all`, // Increased p-3 to p-4
@@ -107,11 +107,11 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto pb-8 md:pb-0 px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-12">
-          <div className="w-full md:w-1/2 md:mt-0 md:mt-10 mb-16 md:mb-0">
+          <div className="w-full md:w-1/2 md:mt-0 mb-16 md:mb-0">
             <div className="inline-block px-5 py-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-6">
-              <p className="text-blue-600 dark:text-blue-400 font-medium">
+              <p className="text-blue-600 dark:text-blue-400 sm:text-md text-xs font-medium">
                 Hello, I&apos;m
               </p>
             </div>
@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
             </h1>
 
             <div className="h-14">
-              <span className="text-2xl sm:text-3xl font-bold text-gray-700 dark:text-gray-300 flex items-center whitespace-nowrap">
+              <span className="text-xl sm:text-3xl font-bold text-gray-700 dark:text-gray-300 flex items-center whitespace-nowrap">
                 I am
                 <span className="text-blue-600 dark:text-blue-500 mx-2">
                   Full-Stack
@@ -132,12 +132,12 @@ const Hero: React.FC = () => {
               </span>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mb-10 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 text-md max-w-2xl mb-10 leading-relaxed">
               {/* Increased mb-8 to mb-10 */}
               Writing clean and reliable code.
             </p>
 
-            <div className="flex gap-6 mb-10">
+            <div className="flex gap-6 mb-10 sm:flex-row flex-col">
               {/* Increased gap-4 to gap-6, mb-8 to mb-10 */}
               <Link href="#contact" className={styles.primaryButton}>
                 Contact Me <ArrowRight className="ml-3" size={18} />{" "}

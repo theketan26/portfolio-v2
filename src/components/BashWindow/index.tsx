@@ -14,10 +14,10 @@ type WindowSelector = {
 const styles = {
   container: "w-full md:w-1/2 flex justify-center md:justify-end ",
   visualContainer: `relative w-full h-72 md:h-96 lg:h-[28rem] flex items-center justify-center `,
-  codeContainer: `min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-gray-200/50 dark:bg-gray-700/50 rounded-lg shadow-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700 `,
-  codeHeader: `flex items-center p-6 w-full`,
+  codeContainer: `md:min-w-xl md:w-full font-(family-name:--font-geist-mono) relative w-full max-w-lg bg-gray-200/50 dark:bg-gray-700/50 rounded-lg shadow-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700 `,
+  codeHeader: `flex items-center p-3 md:p-6 w-full`,
   codeDot: `w-3 h-3 rounded-full mr-2 cursor-pointer`,
-  codeBlock: `bg-gray-300/50 dark:bg-gray-900/50  p-6 font-mono text-sm text-gray-800 dark:text-gray-300`,
+  codeBlock: `bg-gray-300/50 dark:bg-gray-900/50 p-3 md:p-6 font-mono text-xs md:text-sm text-gray-800 dark:text-gray-300`,
   codeLine: `block mb-2`,
   codeHighlight: `text-blue-600 dark:text-blue-400`,
 };
@@ -58,8 +58,8 @@ export default function BashWindow({
   codeBlockClass,
   actions = [],
 }: BashWindowProps) {
-  const windowState = useAppSelector(
-    (state) => (selector != null ? (state[selector] as WindowState) : null),
+  const windowState = useAppSelector((state) =>
+    selector != null ? (state[selector] as WindowState) : null,
   );
   const isOpen = windowState?.isOpen ?? false;
   const isMinimized = windowState?.isMinimized ?? false;
@@ -95,16 +95,38 @@ export default function BashWindow({
               {title}
             </span>
 
-            <div className="ml-auto flex gap-5">
+            <div className="hidden md:flex ml-auto gap-5">
               {actions
                 .filter((action) => action.href)
-                .map((action) => (
-                  <a href={action.href} target="_blank" className="te">
+                .map((action, index) => (
+                  <a
+                    key={index}
+                    href={action.href}
+                    target="_blank"
+                    className="te"
+                  >
                     {action.label}
                   </a>
                 ))}
             </div>
           </div>
+
+          {actions.filter((action) => action.href).length > 0 && (
+            <div className="flex md:hidden gap-5 p-4">
+              {actions
+                .filter((action) => action.href)
+                .map((action, index) => (
+                  <a
+                    key={index}
+                    href={action.href}
+                    target="_blank"
+                    className="te"
+                  >
+                    {action.label}
+                  </a>
+                ))}
+            </div>
+          )}
 
           {!(isHidden || isHiddenProp) && (
             <div className={styles.codeBlock + " " + codeBlockClass}>

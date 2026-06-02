@@ -83,8 +83,8 @@ const Experience: React.FC = () => {
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4"></div>
         </div>
 
-        <div className="mx-auto flex gap-8 xl:flex-row flex-col">
-          <div>
+        <div className="mx-auto flex gap-32 md:gap-8 xl:flex-row flex-col px-4">
+          <div className="flex flex-col md:gap-8 gap-24">
             <h3 className="xl:text-left text-center text-2xl font-bold text-white">
               Work Experience
             </h3>
@@ -109,10 +109,10 @@ const Experience: React.FC = () => {
                   ) : (
                     <div className="flex flex-col gap-4">
                       <div>
-                        <div className="text-2xl text-cyan-400 font-bold">
+                        <div className="text-lg md:text-2xl text-cyan-400 font-bold">
                           Software Development Engineer I
                         </div>
-                        <div className="text-xl">
+                        <div className="text:lg md:text-xl">
                           Techdome Solutions Pvt. Ltd.
                         </div>
                       </div>
@@ -125,7 +125,7 @@ const Experience: React.FC = () => {
                           "Enhanced Bookmarked in React and TSOA, client communication.",
                           "Re-developing Polytox Web Application.",
                         ].map((line, i) => (
-                          <div key={i}>
+                          <div key={i} className="text-xs md:text-md">
                             <span className="text-cyan-400 font-extralight">
                               -
                             </span>{" "}
@@ -165,7 +165,7 @@ const Experience: React.FC = () => {
           </div>
 
           {/* Education */}
-          <div>
+          <div className="flex flex-col md:gap-8 gap-24">
             <h3 className="xl:text-left text-center text-2xl font-bold text-white">
               Education
             </h3>
@@ -195,10 +195,10 @@ const Experience: React.FC = () => {
                     ) : (
                       <div className="flex flex-col gap-4">
                         <div>
-                          <div className="text-2xl text-cyan-400 font-bold">
+                          <div className="text-lg md:text-2xl text-cyan-400 font-bold">
                             Bachelor of Technology
                           </div>
-                          <div className="text-xl">
+                          <div className="text:lg md:text-xl">
                             Sushila Devi Bansal College of Technology
                           </div>
                         </div>
@@ -231,10 +231,12 @@ const Experience: React.FC = () => {
                     ) : (
                       <div className="flex flex-col gap-4">
                         <div>
-                          <div className="text-2xl text-cyan-400 font-bold">
+                          <div className="text-lg md:text-2xl text-cyan-400 font-bold">
                             Higher Secondary Education
                           </div>
-                          <div className="text-xl">Sarafa Vidya Niketan</div>
+                          <div className="text:lg md:text-xl">
+                            Sarafa Vidya Niketan
+                          </div>
                         </div>
 
                         <div className="flex flex-row gap-y-2">

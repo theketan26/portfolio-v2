@@ -172,7 +172,7 @@ const Skills: React.FC = () => {
                       <div key={category} className={`flex h-full flex-col`}>
                         <div className="flex gap-2">
                           <span className="text-cyan-400">$</span>
-                          <span className="dark:text-white text-gray-800">
+                          <span className="dark:text-white text-gray-800 text-md">
                             {(
                               category.charAt(0).toUpperCase() +
                               category.slice(1)
@@ -182,7 +182,7 @@ const Skills: React.FC = () => {
                         {isMinimized ? (
                           <>[...]</>
                         ) : (
-                          <div className="flex-wrap gap-3 flex mt-5 mb-8">
+                          <div className="flex-wrap gap-3 flex mt-5 mb-8 text-xs md:text-md">
                             {skillCategories[category].map((skill) => (
                               <div
                                 key={skill}

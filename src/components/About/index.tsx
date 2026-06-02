@@ -95,15 +95,15 @@ const About: React.FC = () => {
 
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           <div className="w-full md:w-1/2">
-            <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">
+            <h3 className="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">
               My Story
             </h3>
-            <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">
+            <p className="text-gray-800 dark:text-gray-200 text-sm md:text-lg mb-6 leading-relaxed">
               I&apos;m Ketan Solanki, a {age}-year-old tech enthusiast who
               turned my childhood curiosity about computers into a career in
               software engineering.
             </p>
-            <p className="text-gray-800 dark:text-gray-200 text-lg mb-6 leading-relaxed">
+            <p className="text-gray-800 dark:text-gray-200 text-sm md:text-lg mb-6 leading-relaxed">
               As a Software Developer Engineer at{" "}
               <a href="https://techdome.io/" target="_blank">
                 Techdome Solutions
@@ -135,14 +135,14 @@ const About: React.FC = () => {
             </div> */}
           </div>
 
-          <div className="w-full md:w-1/2 flex justify-center">
+          <div className="w-full md:w-1/2 flex justify-center pt-16 md:pt-0">
             <BashWindow
               onClose={() => dispatch(closeCodeWizard())}
               onHidden={() => dispatch(toggleCodeWizardHidden())}
               onMinimized={() => dispatch(toggleCodeWizardMinimized())}
               selector="codeWizard"
               title="codeWizard.js"
-              containerClass="-rotate-5"
+              containerClass="md:-rotate-5"
             >
               {(isMinimized, codeStyles) => (
                 <>
